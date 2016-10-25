@@ -1,0 +1,9 @@
+﻿nav.navbar.navbar-default {
+border-top: none;
+background-color: #FFFFFF;
+opacity: 0.9;
+}
+#divContainer {
+    background-image:url(../images/background.jpg);
+    height:640px;
+}
