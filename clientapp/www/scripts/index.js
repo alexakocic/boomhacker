@@ -13,7 +13,8 @@
         document.addEventListener( 'resume', onResume.bind( this ), false );
         
         // TODO: Cordova has been loaded. Perform any initialization that requires Cordova here.
-        
+        var heightDoc = $(document).height();
+        $('#divContainer').css('height', heightDoc);
     };
 
     function onPause() {
