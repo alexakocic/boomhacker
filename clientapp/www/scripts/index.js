@@ -15,6 +15,7 @@
         // TODO: Cordova has been loaded. Perform any initialization that requires Cordova here.
         var heightDoc = $(document).height();
         $('#divContainer').css('height', heightDoc);
+        loadContentView("map");
     };
 
     function onPause() {
@@ -24,4 +25,11 @@
     function onResume() {
         // TODO: This application has been reactivated. Restore application state here.
     };
-} )();
+})();
+
+function loadContentView(view) {
+    $("#view_content").load("./views/"+view+".html", function (data) {
+        console.log("Ucitan view");
+        initializeMap();
+    });
+}

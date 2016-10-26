@@ -5,4 +5,15 @@ opacity: 0.9;
 }
 #divContainer {
     background-image:url(../images/background.jpg);
+    padding:0px;
+}
+#view_content {
+    margin-top:30px;
+    padding:0px;
+}
+#map_id {
+    height: 92vh;
+    width: 100vw;
+    position: absolute;
+    bottom: 0;
 }
