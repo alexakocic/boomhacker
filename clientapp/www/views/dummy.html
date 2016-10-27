@@ -1,0 +1,49 @@
+﻿
+<div id="dummy_id">
+    <button type="button" class="btn btn-primary" onclick="$('#Searching_Modal').modal('show')">Fire Spinner</button>
+</div>
+<div id="Searching_Modal" class="modal fade" tabindex="-1" role="dialog" data-keyboard="false"
+     data-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header" style="text-align: center">
+                <h3>Searching for Seats</h3>
+            </div>
+            <div class="modal-body">
+                <div style="height:200px">
+                    <span id="searching_spinner_center" style="position: absolute;display: block;top: 50%;left: 50%;"></span>
+                </div>
+            </div>
+            <div class="modal-footer" style="text-align: center">
+                <button type="button" class="btn btn-primary" onclick="$('#Searching_Modal').modal('hide')">Close Spinner</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    var opts = {
+        lines: 13 // The number of lines to draw
+, length: 28 // The length of each line
+, width: 14 // The line thickness
+, radius: 42 // The radius of the inner circle
+, scale: 1 // Scales overall size of the spinner
+, corners: 1 // Corner roundness (0..1)
+, color: '#000' // #rgb or #rrggbb or array of colors
+, opacity: 0.25 // Opacity of the lines
+, rotate: 0 // The rotation offset
+, direction: 1 // 1: clockwise, -1: counterclockwise
+, speed: 1 // Rounds per second
+, trail: 60 // Afterglow percentage
+, fps: 20 // Frames per second when using setTimeout() as a fallback for CSS
+, zIndex: 2e9 // The z-index (defaults to 2000000000)
+, className: 'spinner' // The CSS class to assign to the spinner
+, top: '50%' // Top position relative to parent
+, left: '50%' // Left position relative to parent
+, shadow: false // Whether to render a shadow
+, hwaccel: false // Whether to use hardware acceleration
+, position: 'absolute' // Element positioning
+    }
+    var target = document.getElementById('searching_spinner_center');
+    var spinner = new Spinner(opts).spin(target);
+</script>

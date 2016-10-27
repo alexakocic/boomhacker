@@ -1,4 +1,6 @@
-﻿var initializeMap = function () {
+﻿var initializeMap = function (width, height) {
+    $('#map_id').css('height', height);
+    $('#map_id').css('width', width);
    console.log("Map view");
    var map = L.map('map_id').setView([43.324772, 21.895539], 13);
 
