@@ -1,1 +1,3 @@
 C:\Users\aleks\Source\Repos\boomhacker\hackserver\bin\Microsoft.NodejsTools.WebRole.dll
+D:\Hackaton\hackserver\obj\Debug\hackserver.njsprojResolveAssemblyReference.cache
+D:\Hackaton\hackserver\bin\Microsoft.NodejsTools.WebRole.dll
