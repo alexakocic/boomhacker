@@ -15,17 +15,19 @@ var contentHeight;
         document.addEventListener( 'resume', onResume.bind( this ), false );
         
         // TODO: Cordova has been loaded. Perform any initialization that requires Cordova here.
-        var heightDoc = $(document).height();
-        var widthDoc = $(document).width();
+        var heightDoc = $(window).height();
+        var widthDoc = $(window).width();
         $('#divContainer').css('height', heightDoc);
-        loadContentView("map");
         var navBarHeight = $('#nav_bar').height();
         $('#view_content').css('height', heightDoc - navBarHeight);
         $('#view_content').css('margin-top', navBarHeight);
         contentWidth = widthDoc;
         contentHeight = heightDoc - navBarHeight;
+        loadContentView("map");
 
         setUpMenu();
+        window.onorientationchange = readDeviceOrientation;
+
     };
 
     function onPause() {
@@ -35,18 +37,31 @@ var contentHeight;
     function onResume() {
         // TODO: This application has been reactivated. Restore application state here.
     };
+
+    function loadContentView(view) {
+        $("#view_content").load("./views/" + view + ".html", function (data) {
+            console.log("Ucitan view");
+            if (view === "map")
+                initializeMap(contentWidth, contentHeight);
+        });
+    }
+
+    function readDeviceOrientation() {
+        var heightDoc = window.innerHeight;//$(window).height();
+        var widthDoc = window.innerWidth;//$(window).width();
+        $('#divContainer').css('height', heightDoc);
+        var navBarHeight = $('#nav_bar').height();
+        $('#view_content').css('height', heightDoc - navBarHeight);
+        $('#view_content').css('margin-top', navBarHeight);
+        contentWidth = widthDoc;
+        contentHeight = heightDoc - navBarHeight;
+
+        loadContentView("map");
+    }
+
+    function setUpMenu() {
+        $("#menu_1").click(function () {
+            loadContentView("dummy");
+        });
+    }
 })();
-
-function loadContentView(view) {
-    $("#view_content").load("./views/"+view+".html", function (data) {
-        console.log("Ucitan view");
-        if(view === "map")
-            initializeMap(contentWidth, contentHeight);
-    });
-}
-
-function setUpMenu() {
-    $("#menu_1").click(function () {
-        loadContentView("dummy");
-    });
-}
