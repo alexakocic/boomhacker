@@ -4,12 +4,15 @@
 // and then run "window.location.reload()" in the JavaScript Console.
 var contentWidth;
 var contentHeight;
+var userLocation = {};
+
 (function () {
     "use strict";
 
     document.addEventListener( 'deviceready', onDeviceReady.bind( this ), false );
 
     function onDeviceReady() {
+        
         // Handle the Cordova pause and resume events
         document.addEventListener( 'pause', onPause.bind( this ), false );
         document.addEventListener( 'resume', onResume.bind( this ), false );
@@ -28,6 +31,8 @@ var contentHeight;
         setUpMenu();
         window.onorientationchange = readDeviceOrientation;
 
+        navigator.geolocation.getCurrentPosition(geoLocationSuccess);
+        navigator.geolocation.watchPosition(updateLocationSuccess);
     };
 
     function onPause() {
@@ -42,7 +47,7 @@ var contentHeight;
         $("#view_content").load("./views/" + view + ".html", function (data) {
             console.log("Ucitan view");
             if (view === "map")
-                initializeMap(contentWidth, contentHeight);
+                initializeMap(contentWidth, contentHeight, userLocation);
         });
     }
 
@@ -63,5 +68,23 @@ var contentHeight;
         $("#menu_1").click(function () {
             loadContentView("dummy");
         });
+    }
+
+    function geoLocationSuccess(position) {
+        var latitude = position.coords.latitude;
+        var longitude = position.coords.longitude;
+
+        userLocation.latitude = position.coords.latitude;
+        userLocation.longitude = position.coords.longitude;
+
+    }
+    function updateLocationSuccess(position) {
+        var latitude = position.coords.latitude;
+        var longitude = position.coords.longitude;
+
+        userLocation.latitude = position.coords.latitude;
+        userLocation.longitude = position.coords.longitude;
+
+        changeMarker(userLocation.latitude, userLocation.longitude);
     }
 })();
