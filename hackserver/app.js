@@ -1,6 +1,7 @@
 ﻿var express = require('express');
 var app = express();
 var mongoose = require('mongoose');
+var userController = require('./controllers/user_controller');
 
 mongoose.connect('mongodb://suicidesquad:hackaton123@ds039145.mlab.com:39145/hakaton');
 
@@ -17,3 +18,5 @@ db.once('open', function () {
 app.listen(3000, function () {
     console.log('Server started');
 });
+
+app.use('/users', userController);
