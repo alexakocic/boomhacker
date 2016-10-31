@@ -3,6 +3,7 @@ var app = express();
 var mongoose = require('mongoose');
 var userController = require('./controllers/user_controller');
 
+//konekcija
 mongoose.connect('mongodb://suicidesquad:hackaton123@ds039145.mlab.com:39145/hakaton');
 
 var db = mongoose.connection;
