@@ -61,7 +61,8 @@ var userLocation = {};
         contentWidth = widthDoc;
         contentHeight = heightDoc - navBarHeight;
 
-        loadContentView("map");
+        $('#map_id').css('height', contentHeight);
+        $('#map_id').css('width', contentWidth);
     }
 
     function setUpMenu() {
