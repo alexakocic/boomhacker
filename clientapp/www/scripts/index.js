@@ -5,18 +5,35 @@
 var contentWidth;
 var contentHeight;
 var userLocation = {};
+var loadContentView;
 
 (function () {
     "use strict";
 
-    document.addEventListener( 'deviceready', onDeviceReady.bind( this ), false );
+    document.addEventListener('deviceready', onDeviceReady.bind(this), false);
+
+    loadContentView = function(view) {
+        if (view === "login" || view === "register") {
+            $("#nav_bar").hide();
+        }
+
+        else $("#nav_bar").show();
+
+        $("#view_content").load("./views/" + view + ".html", function (data) {
+            console.log("Ucitan view");
+        });
+
+        $.getScript("../view_scripts/" + view + ".js", function () {
+            console.log("script loaded");
+        });
+    }
 
     function onDeviceReady() {
-        
+
         // Handle the Cordova pause and resume events
-        document.addEventListener( 'pause', onPause.bind( this ), false );
-        document.addEventListener( 'resume', onResume.bind( this ), false );
-        
+        document.addEventListener('pause', onPause.bind(this), false);
+        document.addEventListener('resume', onResume.bind(this), false);
+
         // TODO: Cordova has been loaded. Perform any initialization that requires Cordova here.
         var heightDoc = $(window).height();
         var widthDoc = $(window).width();
@@ -26,9 +43,10 @@ var userLocation = {};
         $('#view_content').css('margin-top', navBarHeight);
         contentWidth = widthDoc;
         contentHeight = heightDoc - navBarHeight;
-        loadContentView("map");
+        loadContentView("login");
 
         setUpMenu();
+
         window.onorientationchange = readDeviceOrientation;
 
         navigator.geolocation.getCurrentPosition(geoLocationSuccess);
@@ -43,14 +61,6 @@ var userLocation = {};
         // TODO: This application has been reactivated. Restore application state here.
     };
 
-    function loadContentView(view) {
-        $("#view_content").load("./views/" + view + ".html", function (data) {
-            console.log("Ucitan view");
-            if (view === "map")
-                initializeMap(contentWidth, contentHeight, userLocation);
-        });
-    }
-
     function readDeviceOrientation() {
         var heightDoc = window.innerHeight;//$(window).height();
         var widthDoc = window.innerWidth;//$(window).width();
@@ -61,6 +71,7 @@ var userLocation = {};
         contentWidth = widthDoc;
         contentHeight = heightDoc - navBarHeight;
 
+
         $('#map_id').css('height', contentHeight);
         $('#map_id').css('width', contentWidth);
     }
@@ -68,6 +79,9 @@ var userLocation = {};
     function setUpMenu() {
         $("#menu_1").click(function () {
             loadContentView("dummy");
+        });
+        $("#menu_2").click(function () {
+            loadContentView("login");
         });
     }
 
@@ -86,6 +100,7 @@ var userLocation = {};
         userLocation.latitude = position.coords.latitude;
         userLocation.longitude = position.coords.longitude;
 
-        changeMarker(userLocation.latitude, userLocation.longitude);
+        if(changeMarker !== undefined)
+            changeMarker(userLocation.latitude, userLocation.longitude);
     }
 })();

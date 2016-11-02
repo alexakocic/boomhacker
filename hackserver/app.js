@@ -2,14 +2,19 @@
 var app = express();
 var mongoose = require('mongoose');
 var userController = require('./controllers/user_controller');
+var morgan = require('morgan');
+var bodyParser = require("body-parser");
 
-//konekcija
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+app.use(morgan('combined'));
+
 mongoose.connect('mongodb://suicidesquad:hackaton123@ds039145.mlab.com:39145/hakaton');
 
 var db = mongoose.connection;
 
 db.on('error', function () {
-    console.log("Error connecting to database")
+    console.log("Error connecting to database");
 });
 
 db.once('open', function () {

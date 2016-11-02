@@ -1,0 +1,38 @@
+﻿@media (orientation: landscape) and (max-height: 767px) {
+    #register_form {
+        position: relative;
+        top: -15%;
+        overflow: hidden
+    }
+}
+
+#register_form {
+    width: 80%;
+    margin: 0 auto;
+}
+
+.register_input {
+    width: 100%;
+    height: 40px;
+    margin: 0;
+    border-radius: 0 !important;
+}
+
+.register_group {
+    margin: 0;
+    margin-bottom: 2%;
+}
+
+#register_image {
+    width: 100px;
+    height: 100px;
+    margin: 0 auto;
+}
+
+.register_button {
+    width: 50%;
+    margin: 0;
+    border-radius: 0 !important;
+    float: left;
+    margin-top: 1%;
+}
