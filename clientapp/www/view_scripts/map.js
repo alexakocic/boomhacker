@@ -53,6 +53,6 @@ function changeMarker(latitude, longitude) {
     }
 }
 
-setTimeout(function () {
+(setTimeout(function () {
     initializeMap(contentWidth, contentHeight, userLocation);
-}, 500);
+}, 500))()

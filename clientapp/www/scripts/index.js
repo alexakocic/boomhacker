@@ -23,9 +23,10 @@ var loadContentView;
             console.log("Ucitan view");
         });
 
-        $.getScript("../view_scripts/" + view + ".js", function () {
-            console.log("script loaded");
-        });
+        /*$.getScript("../view_scripts/" + view + ".js", function () {
+            console.log("Script loaded");
+        });*/
+        //loadScript(view);
     }
 
     function onDeviceReady() {
@@ -43,7 +44,7 @@ var loadContentView;
         $('#view_content').css('margin-top', navBarHeight);
         contentWidth = widthDoc;
         contentHeight = heightDoc - navBarHeight;
-        loadContentView("login");
+        loadContentView("camera");
 
         setUpMenu();
 
@@ -83,6 +84,9 @@ var loadContentView;
         $("#menu_2").click(function () {
             loadContentView("login");
         });
+        $("#menu_3").click(function () {
+            loadContentView("camera");
+        });
     }
 
     function geoLocationSuccess(position) {
@@ -91,8 +95,8 @@ var loadContentView;
 
         userLocation.latitude = position.coords.latitude;
         userLocation.longitude = position.coords.longitude;
-
     }
+
     function updateLocationSuccess(position) {
         var latitude = position.coords.latitude;
         var longitude = position.coords.longitude;
@@ -100,7 +104,13 @@ var loadContentView;
         userLocation.latitude = position.coords.latitude;
         userLocation.longitude = position.coords.longitude;
 
-        if(changeMarker !== undefined)
-            changeMarker(userLocation.latitude, userLocation.longitude);
+        changeMarker(userLocation.latitude, userLocation.longitude);
+    }
+
+    function loadScript(file) {
+        var jsElm = document.createElement("script");
+        jsElm.type = "application/javascript";
+        jsElm.src = "../view_scripts/" + file + ".js"
+        document.body.appendChild(jsElm);
     }
 })();
