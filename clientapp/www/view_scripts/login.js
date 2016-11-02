@@ -1,4 +1,5 @@
-﻿$("#login_form").submit(function (e) {
+﻿function tryLogin(e) {
+    e.preventDefault();
 
     var url = "http://192.168.0.101:3000/users/login";
 
@@ -12,9 +13,7 @@
             }
         }
     });
-
-    e.preventDefault();
-});
+};
 
 function register() {
     loadContentView("register");

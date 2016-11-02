@@ -17,7 +17,7 @@ var loadContentView;
             $("#nav_bar").hide();
         }
 
-        else $("#nav_bar").show();
+        else if (view !== "camera") $("#nav_bar").show();
 
         $("#view_content").load("./views/" + view + ".html", function (data) {
             console.log("Ucitan view");
@@ -44,7 +44,7 @@ var loadContentView;
         $('#view_content').css('margin-top', navBarHeight);
         contentWidth = widthDoc;
         contentHeight = heightDoc - navBarHeight;
-        loadContentView("camera");
+        loadContentView("login");
 
         setUpMenu();
 

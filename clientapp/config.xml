@@ -106,8 +106,8 @@
   <platform name="wp8">
     <splash src="res/screens/wp8/SplashScreenImage.png" width="768" height="1280" />
   </platform>
-  <preference name="Orientation" value="default" />
+  <preference name="Orientation" value="portrait" />
   <plugin name="cordova-plugin-geolocation" version="2.1.0" />
-  <preference name="Fullscreen" value="True" />
+  <preference name="Fullscreen" value="False" />
   <plugin name="cordova-plugin-camera" version="2.1.1" />
 </widget>

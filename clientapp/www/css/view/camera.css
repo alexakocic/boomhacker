@@ -1,4 +1,17 @@
 ﻿#picture_container {
-    width: 100px;
-    height: 100px
+    width: 100%;
+    height: 80%
+}
+
+.camera_button {
+    width:50%;
+    float:left;
+    height:10%;
+    border-radius: 0 !important;
+}
+
+#camera_finish_button {
+    width: 100%;
+    height:10%;
+    border-radius: 0 !important;
 }

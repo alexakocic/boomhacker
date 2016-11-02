@@ -1,4 +1,6 @@
-﻿$("#register_form").submit(function (e) {
+﻿function tryRegister(e) {
+    e.preventDefault();
+
     var url = "http://192.168.0.101:3000/users/register";
 
     $.ajax({
@@ -7,14 +9,13 @@
         data: $("#register_form").serialize(),
         success: function (data) {
             if (data === "OK") {
-                loadContentView("map");
+                loadContentView("camera");
             }
         }
     });
+};
 
+function login(e) {
     e.preventDefault();
-});
-
-function login() {
     loadContentView("login");
 }
