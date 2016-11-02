@@ -87,6 +87,9 @@ var loadContentView;
         $("#menu_3").click(function () {
             loadContentView("camera");
         });
+        $("#menu_4").click(function () {
+            loadContentView("svgView");
+        });
     }
 
     function geoLocationSuccess(position) {
