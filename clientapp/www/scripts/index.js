@@ -83,6 +83,9 @@ var loadContentView;
         $("#menu_2").click(function () {
             loadContentView("login");
         });
+        $("#menu_3").click(function () {
+            loadContentView("svgView");
+        });
     }
 
     function geoLocationSuccess(position) {
