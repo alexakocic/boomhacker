@@ -18,4 +18,4 @@
 
 function register() {
     loadContentView("register");
-}
+};

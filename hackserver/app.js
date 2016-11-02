@@ -7,7 +7,7 @@ var bodyParser = require("body-parser");
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.use(morgan('combined'));
+app.use(morgan('dev'));
 
 mongoose.connect('mongodb://suicidesquad:hackaton123@ds039145.mlab.com:39145/hakaton');
 
