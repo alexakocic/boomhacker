@@ -45,7 +45,7 @@ var loadContentView;
         $('#navbarTitle').css('font-size', navBarHeight / 2);
         contentWidth = widthDoc;
         contentHeight = heightDoc - navBarHeight;
-        loadContentView("camera");
+        loadContentView("map");
 
         setUpMenu();
 
@@ -80,7 +80,7 @@ var loadContentView;
 
     function setUpMenu() {
         $("#menu_1").click(function () {
-            loadContentView("dummy");
+            loadContentView("map");
         });
         $("#menu_2").click(function () {
             loadContentView("login");
