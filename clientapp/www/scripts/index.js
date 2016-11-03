@@ -17,7 +17,7 @@ var loadContentView;
             $("#nav_bar").hide();
         }
 
-        else if (view !== "camera") $("#nav_bar").show();
+        else $("#nav_bar").show();
 
         $("#view_content").load("./views/" + view + ".html", function (data) {
             console.log("Ucitan view");
