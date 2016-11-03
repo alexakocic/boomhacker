@@ -5,16 +5,15 @@ var schemas = require('../schema');
 
 router.post('/register', function (req, res) {
     var body = req.body;
-    var djurko = new schemas.User({
+    var user = new schemas.User({
         username: body.username,
         password: body.password,
         email: body.email
     });
 
-    djurko.save(function (err, djurko) {
+    user.save(function (err, savedUser) {
         try {
-            console.log("OK");
-            res.status(200).send("OK");
+            res.status(200).send(savedUser._id);
         }
         catch (err) {
             console.log(err.message);
@@ -25,17 +24,26 @@ router.post('/register', function (req, res) {
 
 router.get('/login', function (req, res) {
     var query = req.query;
-    console.log(query);
-    schemas.User.findOne({ username: query.username }, "username, password", function (err, user) {
+    schemas.User.findOne({ username: query.username }, "_id, username, password", function (err, user) {
+        console.log(user);
         try {
+            if (user._id === undefined) throw new Error("No such user");
             if (user.password !== query.password) throw new Error("Wrong password!");
             console.log(user.username);
-            res.status(200).send("OK");
+            res.status(200).send(user._id);
         }
         catch (err) {
             console.log(err.message);
             res.status(500).send(err.message);
         }
+    });
+});
+
+router.put('/picture', function (req, res) {
+    var body = req.body;
+    schemas.User.update({ _id: body.id }, { picture: body.picture }, function (err, raw) {
+        console.log('The raw response from Mongo was ', raw);
+        res.status(200).send("OK");
     });
 });
 

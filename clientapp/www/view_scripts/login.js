@@ -8,9 +8,9 @@
         url: url,
         data: $("#login_form").serialize(),
         success: function (data) {
-            if (data === "OK") {
-                loadContentView("map");
-            }
+            localStorage.setItem("id", data);
+            console.log(localStorage.getItem("id"));
+            loadContentView("map");
         }
     });
 };
