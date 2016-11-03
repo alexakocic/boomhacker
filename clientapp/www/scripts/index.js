@@ -24,6 +24,7 @@ var userLocation = {};
         var navBarHeight = $('#nav_bar').height();
         $('#view_content').css('height', heightDoc - navBarHeight);
         $('#view_content').css('margin-top', navBarHeight);
+        $('#navbarTitle').css('font-size', navBarHeight / 2);
         contentWidth = widthDoc;
         contentHeight = heightDoc - navBarHeight;
         loadContentView("map");
@@ -46,8 +47,13 @@ var userLocation = {};
     function loadContentView(view) {
         $("#view_content").load("./views/" + view + ".html", function (data) {
             console.log("Ucitan view");
-            if (view === "map")
+            if (view === "map") {
                 initializeMap(contentWidth, contentHeight, userLocation);
+                $('#navbarTitle').html("Mapa");
+            }
+            else {
+                $('#navbarTitle').html("Dummy");
+            }
         });
     }
 
@@ -69,9 +75,17 @@ var userLocation = {};
         $("#menu_1").click(function () {
             loadContentView("dummy");
         });
+        $("#menu_2").click(function () {
+            loadContentView("list_users");
+        });
+        $("#menu_3").click(function () {
+            console.log("Meni 3");
+            inAppBrowserRef = cordova.InAppBrowser.open("http://192.168.0.105:8080/home", "_self", "location=no,hidden=yes");
+        });
     }
 
     function geoLocationSuccess(position) {
+        console.log(position);
         var latitude = position.coords.latitude;
         var longitude = position.coords.longitude;
 
