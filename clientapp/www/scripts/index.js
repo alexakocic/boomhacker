@@ -91,6 +91,9 @@ var loadContentView;
         $("#menu_4").click(function () {
             loadContentView("svg");
         });
+        $("#menu_6").click(function () {
+            loadContentView("profile");
+        });
     }
 
     function geoLocationSuccess(position) {

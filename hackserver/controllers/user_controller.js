@@ -25,9 +25,8 @@ router.post('/register', function (req, res) {
 router.get('/login', function (req, res) {
     var query = req.query;
     schemas.User.findOne({ username: query.username }, "_id, username, password", function (err, user) {
-        console.log(user);
         try {
-            if (user._id === undefined) throw new Error("No such user");
+            if (user === null || user._id === undefined) throw new Error("No such user");
             if (user.password !== query.password) throw new Error("Wrong password!");
             console.log(user.username);
             res.status(200).send(user._id);
@@ -44,6 +43,20 @@ router.put('/picture', function (req, res) {
     schemas.User.update({ _id: body.id }, { picture: body.picture }, function (err, raw) {
         console.log('The raw response from Mongo was ', raw);
         res.status(200).send("OK");
+    });
+});
+
+router.get('/user', function (req, res) {
+    var query = req.query;
+    schemas.User.findById(query.id, function (err, user) {
+        try {
+            if (user === null) throw new Error("No such user");
+            res.status(200).send(user);
+        }
+        catch(err) {
+            console.log(err);
+            res.status(500).send(err);
+        }
     });
 });
 
