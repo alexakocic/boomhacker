@@ -8,9 +8,8 @@
         url: url,
         data: $("#register_form").serialize(),
         success: function (data) {
-            if (data === "OK") {
-                loadContentView("camera");
-            }
+            localStorage.setItem("id", data);
+            loadContentView("camera");
         }
     });
 };

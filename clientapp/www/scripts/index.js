@@ -17,7 +17,7 @@ var loadContentView;
             $("#nav_bar").hide();
         }
 
-        else if (view !== "camera") $("#nav_bar").show();
+        else $("#nav_bar").show();
 
         $("#view_content").load("./views/" + view + ".html", function (data) {
             console.log("Ucitan view");
@@ -42,6 +42,7 @@ var loadContentView;
         var navBarHeight = $('#nav_bar').height();
         $('#view_content').css('height', heightDoc - navBarHeight);
         $('#view_content').css('margin-top', navBarHeight);
+        $('#navbarTitle').css('font-size', navBarHeight / 2);
         contentWidth = widthDoc;
         contentHeight = heightDoc - navBarHeight;
         loadContentView("camera");
@@ -93,6 +94,7 @@ var loadContentView;
     }
 
     function geoLocationSuccess(position) {
+        console.log(position);
         var latitude = position.coords.latitude;
         var longitude = position.coords.longitude;
 

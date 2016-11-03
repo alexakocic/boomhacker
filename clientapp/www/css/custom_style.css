@@ -29,3 +29,7 @@
     position: absolute;
     bottom: 0;
 }
+#navbarTitle {
+    position:fixed;
+    margin:10px;
+}
