@@ -44,7 +44,7 @@ var loadContentView;
         $('#view_content').css('margin-top', navBarHeight);
         contentWidth = widthDoc;
         contentHeight = heightDoc - navBarHeight;
-        loadContentView("login");
+        loadContentView("camera");
 
         setUpMenu();
 
@@ -88,7 +88,7 @@ var loadContentView;
             loadContentView("camera");
         });
         $("#menu_4").click(function () {
-            loadContentView("svgView");
+            loadContentView("svg");
         });
     }
 
