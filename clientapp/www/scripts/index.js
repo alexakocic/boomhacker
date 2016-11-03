@@ -80,7 +80,7 @@ var loadContentView;
 
     function setUpMenu() {
         $("#menu_1").click(function () {
-            loadContentView("dummy");
+            loadContentView("map");
         });
         $("#menu_2").click(function () {
             loadContentView("login");
