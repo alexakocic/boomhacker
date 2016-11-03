@@ -5,18 +5,36 @@
 var contentWidth;
 var contentHeight;
 var userLocation = {};
+var loadContentView;
 
 (function () {
     "use strict";
 
-    document.addEventListener( 'deviceready', onDeviceReady.bind( this ), false );
+    document.addEventListener('deviceready', onDeviceReady.bind(this), false);
+
+    loadContentView = function(view) {
+        if (view === "login" || view === "register") {
+            $("#nav_bar").hide();
+        }
+
+        else if (view !== "camera") $("#nav_bar").show();
+
+        $("#view_content").load("./views/" + view + ".html", function (data) {
+            console.log("Ucitan view");
+        });
+
+        /*$.getScript("../view_scripts/" + view + ".js", function () {
+            console.log("Script loaded");
+        });*/
+        //loadScript(view);
+    }
 
     function onDeviceReady() {
-        
+
         // Handle the Cordova pause and resume events
-        document.addEventListener( 'pause', onPause.bind( this ), false );
-        document.addEventListener( 'resume', onResume.bind( this ), false );
-        
+        document.addEventListener('pause', onPause.bind(this), false);
+        document.addEventListener('resume', onResume.bind(this), false);
+
         // TODO: Cordova has been loaded. Perform any initialization that requires Cordova here.
         var heightDoc = $(window).height();
         var widthDoc = $(window).width();
@@ -27,9 +45,10 @@ var userLocation = {};
         $('#navbarTitle').css('font-size', navBarHeight / 2);
         contentWidth = widthDoc;
         contentHeight = heightDoc - navBarHeight;
-        loadContentView("map");
+        loadContentView("login");
 
         setUpMenu();
+
         window.onorientationchange = readDeviceOrientation;
 
         navigator.geolocation.getCurrentPosition(geoLocationSuccess);
@@ -44,19 +63,6 @@ var userLocation = {};
         // TODO: This application has been reactivated. Restore application state here.
     };
 
-    function loadContentView(view) {
-        $("#view_content").load("./views/" + view + ".html", function (data) {
-            console.log("Ucitan view");
-            if (view === "map") {
-                initializeMap(contentWidth, contentHeight, userLocation);
-                $('#navbarTitle').html("Mapa");
-            }
-            else {
-                $('#navbarTitle').html("Dummy");
-            }
-        });
-    }
-
     function readDeviceOrientation() {
         var heightDoc = window.innerHeight;//$(window).height();
         var widthDoc = window.innerWidth;//$(window).width();
@@ -67,6 +73,7 @@ var userLocation = {};
         contentWidth = widthDoc;
         contentHeight = heightDoc - navBarHeight;
 
+
         $('#map_id').css('height', contentHeight);
         $('#map_id').css('width', contentWidth);
     }
@@ -76,11 +83,13 @@ var userLocation = {};
             loadContentView("dummy");
         });
         $("#menu_2").click(function () {
-            loadContentView("list_users");
+            loadContentView("login");
         });
         $("#menu_3").click(function () {
-            console.log("Meni 3");
-            inAppBrowserRef = cordova.InAppBrowser.open("http://192.168.0.105:8080/home", "_self", "location=no,hidden=yes");
+            loadContentView("camera");
+        });
+        $("#menu_4").click(function () {
+            loadContentView("svgView");
         });
     }
 
@@ -91,8 +100,8 @@ var userLocation = {};
 
         userLocation.latitude = position.coords.latitude;
         userLocation.longitude = position.coords.longitude;
-
     }
+
     function updateLocationSuccess(position) {
         var latitude = position.coords.latitude;
         var longitude = position.coords.longitude;
@@ -101,5 +110,12 @@ var userLocation = {};
         userLocation.longitude = position.coords.longitude;
 
         changeMarker(userLocation.latitude, userLocation.longitude);
+    }
+
+    function loadScript(file) {
+        var jsElm = document.createElement("script");
+        jsElm.type = "application/javascript";
+        jsElm.src = "../view_scripts/" + file + ".js"
+        document.body.appendChild(jsElm);
     }
 })();

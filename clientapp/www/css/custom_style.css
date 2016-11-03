@@ -11,12 +11,16 @@
 }
 
 #divContainer {
-    background-image: url(../images/background.jpg);
     padding: 0px;
+    height: 100%;
+    width: 100%;
+    margin: 0
 }
 
 #view_content {
     padding: 0px;
+    width: 100%;
+    height: 100%
 }
 
 #map_id {

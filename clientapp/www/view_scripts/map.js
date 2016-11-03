@@ -212,3 +212,7 @@ function changeMarker(latitude, longitude) {
         marker.setLatLng([latitude, longitude]).update();
     }
 }
+
+setTimeout(function () {
+    initializeMap(contentWidth, contentHeight, userLocation);
+}, 500);
