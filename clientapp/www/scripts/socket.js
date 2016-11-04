@@ -1,5 +1,6 @@
-﻿function setUpSocket() {
-    var socket = io.connect(ipadress + ":" + socketport);
+﻿var socket
+function setUpSocket() {
+    socket = io.connect(ipadress + ":" + socketport);
     console.log("Device ready");
     socket.on('connect', function () {
         socket.emit('cock', "user1");

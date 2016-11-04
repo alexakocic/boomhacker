@@ -208,8 +208,7 @@ function PointsAnime(collection) {
 }
 var overlays = {};
 function markerOnClick() {
-    console.log("Marker kliknut");
-    reset();
+    socket.emit('marker', "Marker je kliknut");
 }
 function setMarker(latitude, longitude) {
     markerIcon = L.icon({
