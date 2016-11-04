@@ -1,17 +1,27 @@
-﻿<form id="register_form">
-    <div class="form-group register_group">
+﻿<div id="register_bckg"></div>
+<form id="register_form">
+    <div class="input_div">
         <label for="username">Username:</label>
-        <input type="text" name="username" placeholder="Username" class="register_input form-control" />
+        <i class="glyphicon glyphicon-user"></i>
+        <input type="text" name="username" placeholder="Username" class="" />
     </div>
-    <div class="form-group register_group">
+    <div class="input_div">
         <label for="email">Email:</label>
-        <input type="email" name="email" placeholder="Email" class="register_input form-control" />
+        <i class="glyphicon glyphicon-envelope"></i>
+        <input type="email" name="email" placeholder="Email" class="" />
     </div>
-    <div class="form-group register_group">
+    <div class="input_div">
         <label for="Password">Password:</label>
-        <input type="password" placeholder="Password" name="password" class="register_input form-control" />
+        <i class="glyphicon glyphicon-eye-open"></i>
+        <input type="password" placeholder="Password" name="password" class="" />
     </div>
-    <button class="btn btn-primary register_button" onclick="login(event)">Login</button>
-    <button type="submit" class="btn btn-primary register_button" onclick="tryRegister(event)">Register</button>
+    <button onclick="login(event)">
+        <i class="glyphicon glyphicon-arrow-left"></i>
+        Login
+    </button>
+    <button onclick="tryRegister(event)">
+        <i class="glyphicon glyphicon-ok"></i>
+        Register
+    </button>
 </form>
 <script type="text/javascript" src="view_scripts/register.js"></script>
