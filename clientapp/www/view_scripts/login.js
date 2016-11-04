@@ -1,7 +1,7 @@
 ﻿function tryLogin(e) {
     e.preventDefault();
 
-    var url = "http://192.168.0.101:3000/users/login";
+    var url = "http://192.168.1.10:3000/users/login";
 
     $.ajax({
         type: "GET",

@@ -6,7 +6,9 @@ var contentWidth;
 var contentHeight;
 var userLocation = {};
 var loadContentView;
-
+function ajdeee() {
+    console.log("Izes mi govno");
+}
 (function () {
     "use strict";
 
@@ -21,6 +23,9 @@ var loadContentView;
 
         $("#view_content").load("./views/" + view + ".html", function (data) {
             console.log("Ucitan view");
+            if (view == "map") {
+                initializeMap(contentWidth, contentHeight, userLocation);
+            }
         });
 
         /*$.getScript("../view_scripts/" + view + ".js", function () {
@@ -92,6 +97,12 @@ var loadContentView;
             loadContentView("svg");
         });
         $("#menu_5").click(function () {
+            loadContentView("list_users");
+        });
+        $("#menu_6").click(function () {
+            loadContentView("profile");
+        });
+        $("#menu_7").click(function () {
             loadContentView("svgSpinners");
         });
     }
