@@ -241,3 +241,5 @@ function changeMarker(latitude, longitude) {
         marker.setLatLng([latitude, longitude]).update();
     }
 }
+
+initializeMap(contentWidth, contentHeight, userLocation);
