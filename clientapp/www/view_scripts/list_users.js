@@ -1,4 +1,6 @@
-﻿var url = ipadress + ":" + mainport + "/users/users";
+﻿socket.emit('message', { id: "581a9c74630ece35a087010f", text: "Gde si matke :)" });
+
+var url = ipadress + ":" + mainport + "/users/users";
 
 $.ajax({
     type: "GET",

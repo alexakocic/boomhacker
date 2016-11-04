@@ -1,4 +1,5 @@
-﻿var socket
+﻿var socket;
+
 function setUpSocket() {
     socket = io.connect(ipadress + ":" + socketport);
     console.log("Device ready");
@@ -8,5 +9,12 @@ function setUpSocket() {
 
     socket.on('hello', function (msg) {
         alert(msg);
+    });
+
+    socket.on('message', function (msg) {
+        var id = msg.id;
+        if (id === localStorage.getItem("id")) {
+            alert(msg.text);
+        }
     });
 }

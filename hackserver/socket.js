@@ -17,4 +17,12 @@ io.on('connection', function (socket) {
     socket.on('cock', function (msg) {
         socket.emit('hello', 'hello user!');
     });
+
+    socket.on('marker', function (msg) {
+        console.log("marker sent");
+    });
+
+    socket.on('message', function (msg) {
+        socket.broadcast.emit(msg);
+    });
 });
