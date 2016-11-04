@@ -25,3 +25,5 @@ db.once('open', function () {
 app.listen(3000, function () {
     console.log('Server started');
 });
+
+app.use('/users', userController);
