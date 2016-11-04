@@ -47,7 +47,7 @@ var mainport = "3000";
         $('#navbarTitle').css('font-size', navBarHeight / 2);
         contentWidth = widthDoc;
         contentHeight = heightDoc - navBarHeight;
-        loadContentView("map");
+        loadContentView("register");
 
         setUpMenu();
 

@@ -20,10 +20,14 @@ function register() {
 };
 
 $('#login_form').ready(function () {
+    $('#login_bckg').css('width', $(window).width() * 0.9)
+    $('#login_bckg').css('height', $(window).height() * 0.9);
+    $('#login_bckg').css('margin-left', $(window).width() * 0.05);
+    $('#login_bckg').css('margin-top', -$(window).height() * 0.05);
+
+
     $('#login_form').css('width', $(window).width() * 0.9)
-    $('#login_form').css('height', $(window).height() * 0.9);
-    $('#login_form').css('margin-top', -$(window).height() * 0.04);
-
-    $('#login_form').css('opacity', 0.3);
-
+    $('#login_form').css('height', $(window).height() * 0.6);
+    $('#login_form').css('margin-left', $(window).width() * 0.05);
+    $('#login_form').css('margin-top', -$(window).height() * 0.01);
 });
