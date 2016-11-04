@@ -3,6 +3,7 @@
 $.ajax({
     type: "GET",
     url: url,
+    data: { id: localStorage.getItem("id") },
     success: function (data) {
         data.forEach(function (element) {
             $('#list_container').append('<div class="row list_card" data-id="' + element._id + '">' +
