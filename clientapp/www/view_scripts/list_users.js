@@ -2,6 +2,8 @@
 
 var url = ipadress + ":" + mainport + "/users/users";
 
+alert("KURAC");
+
 $.ajax({
     type: "GET",
     url: url,
