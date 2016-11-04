@@ -4,6 +4,7 @@ var mongoose = require('mongoose');
 var userController = require('./controllers/user_controller');
 var morgan = require('morgan');
 var bodyParser = require("body-parser");
+var socket = require("./socket.js");
 
 app.use(bodyParser.urlencoded({ limit: '50mb', extended: false }));
 app.use(bodyParser.json());
@@ -24,5 +25,3 @@ db.once('open', function () {
 app.listen(3000, function () {
     console.log('Server started');
 });
-
-app.use('/users', userController);
