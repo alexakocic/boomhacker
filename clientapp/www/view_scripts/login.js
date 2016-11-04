@@ -18,3 +18,12 @@
 function register() {
     loadContentView("register");
 };
+
+$('#login_form').ready(function () {
+    $('#login_form').css('width', $(window).width() * 0.9)
+    $('#login_form').css('height', $(window).height() * 0.9);
+    $('#login_form').css('margin-top', -$(window).height() * 0.04);
+
+    $('#login_form').css('opacity', 0.3);
+
+});

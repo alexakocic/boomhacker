@@ -50,7 +50,7 @@ var mainport = "3000";
         $('#navbarTitle').css('font-size', navBarHeight / 2);
         contentWidth = widthDoc;
         contentHeight = heightDoc - navBarHeight;
-        loadContentView("map");
+        loadContentView("login");
 
         setUpMenu();
 
@@ -95,6 +95,9 @@ var mainport = "3000";
         });
         $("#menu_4").click(function () {
             loadContentView("svg");
+        });
+        $("#menu_5").click(function () {
+            loadContentView("list_users");
         });
         $("#menu_6").click(function () {
             loadContentView("profile");
