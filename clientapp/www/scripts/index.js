@@ -45,7 +45,7 @@ var loadContentView;
         $('#navbarTitle').css('font-size', navBarHeight / 2);
         contentWidth = widthDoc;
         contentHeight = heightDoc - navBarHeight;
-        loadContentView("map");
+        loadContentView("svgSpinners");
 
         setUpMenu();
 
@@ -90,6 +90,9 @@ var loadContentView;
         });
         $("#menu_4").click(function () {
             loadContentView("svg");
+        });
+        $("#menu_5").click(function () {
+            loadContentView("svgSpinners");
         });
     }
 
