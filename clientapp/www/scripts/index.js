@@ -6,6 +6,8 @@ var contentWidth;
 var contentHeight;
 var userLocation = {};
 var loadContentView;
+var ipadress = "http://192.168.0.102";
+var mainport = "3000";
 
 (function () {
     "use strict";
