@@ -33,10 +33,12 @@
     <Compile Include="app.js" />
     <Compile Include="controllers\user_controller.js" />
     <Compile Include="schema.js" />
+    <Compile Include="socket.js" />
     <Content Include="package.json" />
     <Content Include="README.md" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="bin\" />
     <Folder Include="controllers\" />
     <Folder Include="typings\" />
     <Folder Include="typings\globals\" />
