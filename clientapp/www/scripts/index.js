@@ -23,9 +23,6 @@ var mainport = "3000";
 
         $("#view_content").load("./views/" + view + ".html", function (data) {
             console.log("Ucitan view");
-            if (view == "map") {
-                initializeMap(contentWidth, contentHeight, userLocation);
-            }
         });
 
         /*$.getScript("../view_scripts/" + view + ".js", function () {
@@ -50,7 +47,7 @@ var mainport = "3000";
         $('#navbarTitle').css('font-size', navBarHeight / 2);
         contentWidth = widthDoc;
         contentHeight = heightDoc - navBarHeight;
-        loadContentView("login");
+        loadContentView("map");
 
         setUpMenu();
 

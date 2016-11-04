@@ -60,4 +60,17 @@ router.get('/user', function (req, res) {
     });
 });
 
+router.get('/users', function (req, res) {
+    var query = req.query;;
+    schemas.User.find({}, function (err, result) {
+        try {
+            res.status(200).send(result);
+        }
+        catch (err) {
+            console.log(err);
+            res.status(500).send(err);
+        }
+    });
+});
+
 module.exports = router;
