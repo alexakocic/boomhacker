@@ -23,6 +23,6 @@ io.on('connection', function (socket) {
     });
 
     socket.on('message', function (msg) {
-        socket.broadcast.emit(msg);
+        socket.broadcast.emit('message', msg);
     });
 });
