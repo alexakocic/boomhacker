@@ -197,7 +197,7 @@ function PointsAnime(collection) {
             var p = linePath.node().getPointAtLength(t * l);
             //Move the marker to that point
             marker.attr("transform", "translate(" + p.x + "," + p.y + ")"); //move marker
-            console.log(interpolate(t));
+            //console.log(interpolate(t));
             return interpolate(t);
         }
     } //end tweenDash
