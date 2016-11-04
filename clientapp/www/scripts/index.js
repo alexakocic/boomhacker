@@ -50,7 +50,7 @@ function ajdeee() {
         $('#navbarTitle').css('font-size', navBarHeight / 2);
         contentWidth = widthDoc;
         contentHeight = heightDoc - navBarHeight;
-        loadContentView("login");
+        loadContentView("map");
 
         setUpMenu();
 
@@ -85,7 +85,7 @@ function ajdeee() {
 
     function setUpMenu() {
         $("#menu_1").click(function () {
-            loadContentView("dummy");
+            loadContentView("map");
         });
         $("#menu_2").click(function () {
             loadContentView("login");
@@ -94,7 +94,13 @@ function ajdeee() {
             loadContentView("camera");
         });
         $("#menu_4").click(function () {
-            loadContentView("svgView");
+            loadContentView("svg");
+        });
+        $("#menu_5").click(function () {
+            loadContentView("list_users");
+        });
+        $("#menu_6").click(function () {
+            loadContentView("profile");
         });
     }
     
