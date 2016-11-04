@@ -23,6 +23,9 @@ var mainport = "3000";
 
         $("#view_content").load("./views/" + view + ".html", function (data) {
             console.log("Ucitan view");
+            if (view == "map") {
+                initializeMap(contentWidth, contentHeight, userLocation);
+            }
         });
 
         /*$.getScript("../view_scripts/" + view + ".js", function () {
@@ -93,14 +96,11 @@ var mainport = "3000";
         $("#menu_4").click(function () {
             loadContentView("svg");
         });
-        $("#menu_5").click(function () {
-            loadContentView("list_users");
-        });
         $("#menu_6").click(function () {
             loadContentView("profile");
         });
     }
-
+    
     function geoLocationSuccess(position) {
         console.log(position);
         var latitude = position.coords.latitude;

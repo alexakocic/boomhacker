@@ -1,4 +1,16 @@
-﻿var width = $(window).width(),
+﻿var startX = 0;
+var startY = 0;
+$('#svgDiv').click(function () {
+    console.log('ce bude nesto');
+
+    /*var svg = d3.select("#svgDiv").select("svg");
+    svg.append("circle").attr("cx", startX+25).attr("cy", startY+25).attr("r", 50).style("fill", "purple");
+    startX += 50;
+    startY += 50;
+    console.log('il nece');*/
+});
+
+var width = screen.width,
     height = $('#view_content').height();
 
 var n = 100,
