@@ -20,10 +20,10 @@ function login(e) {
 }
 
 $('#register_form').ready(function () {
-    $('#register_bckg').css('width', $(window).width() * 0.9)
-    $('#register_bckg').css('height', $(window).height() * 0.9);
-    $('#register_bckg').css('margin-left', $(window).width() * 0.05);
-    $('#register_bckg').css('margin-top', -$(window).height() * 0.05);
+    $('#register_bckg').css('width', $(window).width())
+    $('#register_bckg').css('height', $(window).height());
+    //$('#register_bckg').css('margin-left', $(window).width() * 0.05);
+    $('#register_bckg').css('margin-top', -$('#nav_bar').height());
 
 
     $('#register_form').css('width', $(window).width() * 0.9)
