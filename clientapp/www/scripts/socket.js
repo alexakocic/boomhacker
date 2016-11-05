@@ -17,4 +17,14 @@ function setUpSocket() {
             alert(msg.text);
         }
     });
+
+    socket.on('locationUpdate', function (msg) {
+        
+    });
+
+    socket.on('venues', function (msg) {
+        alert("venues socket");
+        var mapdiv = $('#map_div');
+        populateMap(msg);
+    });
 }

@@ -20,8 +20,9 @@ var baselayers = {
 function initializeMap(width, height, location) {
     $('#map_id').css('height', height);
     $('#map_id').css('width', width);
-    
-    map = L.map('map_id').setView([40.722390, -73.995170], 13);
+    console.log("Map view");
+
+    map = L.map('map_id').setView([43.324772, 21.895539], 13);
 
     /*L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
         attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
@@ -40,14 +41,6 @@ function initializeMap(width, height, location) {
     testArr.push({ lat: 40.725190, lng: -73.992150, name: "Misko" });
     var collection = makeAGsonCollection(testArr);
     PointsAnime(collection);
-
-    /*add easy button*/
-    L.easyButton('glyphicon glyphicon-home', function (btn, map) {
-        //$('#myModal').modal('toggle');
-        $('#myModal').modal('show');
-        //$('#myModal').modal('hide');
-        $('#myModal').find('.modal-body').load("./views/settings.html");
-    }).addTo(map);
 }
 //[{lat:40.722390,lng:-73.995170,name:"Jovke"}]
 function makeAGsonCollection(arrayOfLocations) {

@@ -5,7 +5,7 @@ var userController = require('./controllers/user_controller');
 var morgan = require('morgan');
 var bodyParser = require("body-parser");
 var socket = require("./socket.js");
-var foursquare = (require('foursquarevenues'))('I1LBBPBDFUH3TNLAZEMQ0TG5RU3J3TRENGESX1052JJSUQ0S', 'JEK24NUPFF1IIWHXLN3BPWHRGFU0AHOUOPUGRP332ZGH5SKV');
+var venues = require('./controllers/venues_controller');
 
 app.use(bodyParser.urlencoded({ limit: '50mb', extended: false }));
 app.use(bodyParser.json());
@@ -28,15 +28,5 @@ app.listen(3000, function () {
 });
 
 app.use('/users', userController);
-//foursquare test
-var params = {
-    "ll": '43.324772' + "," + '21.895539',
-    "radius": 1000
-};
-foursquare.getVenues(params, function (error, venues) {
-    console.log(error);
-    console.log(venues.response.venues[0]);
 
-    
-});
-//
+//venues.getFoursquareVenues(43.324772, 21.895539, 1000);

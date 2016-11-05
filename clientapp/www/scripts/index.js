@@ -4,7 +4,6 @@
 // and then run "window.location.reload()" in the JavaScript Console.
 var contentWidth;
 var contentHeight;
-var userLocation = {};
 var loadContentView;
 var ipadress = "http://10.66.124.53";
 var mainport = "3000";
@@ -34,6 +33,7 @@ var socketport = "3001";
 
     function onDeviceReady() {
 
+        loadContentView("login");
         // Handle the Cordova pause and resume events
         document.addEventListener('pause', onPause.bind(this), false);
         document.addEventListener('resume', onResume.bind(this), false);
@@ -42,20 +42,12 @@ var socketport = "3001";
         var heightDoc = $(window).height();
         var widthDoc = $(window).width();
         $('#divContainer').css('height', heightDoc);
-        var navBarHeight = $('#nav_bar').height();
-        $('#view_content').css('height', heightDoc - navBarHeight);
-        $('#view_content').css('margin-top', navBarHeight);
-        $('#navbarTitle').css('font-size', navBarHeight / 2);
         contentWidth = widthDoc;
         contentHeight = heightDoc - navBarHeight;
-        loadContentView("map");
 
-        setUpMenu();
+        //setUpMenu();
 
         window.onorientationchange = readDeviceOrientation;
-
-        navigator.geolocation.getCurrentPosition(geoLocationSuccess);
-        navigator.geolocation.watchPosition(updateLocationSuccess);
 
         setUpSocket();
     };
@@ -103,26 +95,7 @@ var socketport = "3001";
             loadContentView("profile");
         });
     }
-    
-    function geoLocationSuccess(position) {
-        console.log(position);
-        var latitude = position.coords.latitude;
-        var longitude = position.coords.longitude;
-
-        userLocation.latitude = position.coords.latitude;
-        userLocation.longitude = position.coords.longitude;
-    }
-
-    function updateLocationSuccess(position) {
-        var latitude = position.coords.latitude;
-        var longitude = position.coords.longitude;
-
-        userLocation.latitude = position.coords.latitude;
-        userLocation.longitude = position.coords.longitude;
-
-        changeMarker(userLocation.latitude, userLocation.longitude);
-    }
-
+  
     function loadScript(file) {
         var jsElm = document.createElement("script");
         jsElm.type = "application/javascript";
