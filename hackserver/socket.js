@@ -30,6 +30,7 @@ io.on('connection', function (socket) {
     });
 
     socket.on('locationUpdate', function (msg) {
+        console.log("working bro...");
         schemas.User.update({ _id: msg.id }, { location: { lat: msg.lat, lon: msg.lon } }, function (err, raw) {
             try {
                 schemas.User.update({ _id: msg.id }, { lat: msg.lat, lon: msg.lon }, function (err, raw) {

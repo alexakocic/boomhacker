@@ -88,9 +88,9 @@ function getFoursquareVenues(lat, lng, radius, socket) {
                 tempLocArr.push(location);
             });
             console.log("<--------Presorted venues------->");
-            venue_list.forEach(function (obj) {
+            /*venue_list.forEach(function (obj) {
                 console.log(obj.name);
-            });
+            });*/
             var numOfVenues = tempLocArr.length;
             //sorting venues
             for (var i = 0; i < numOfVenues; i++) {
@@ -103,10 +103,10 @@ function getFoursquareVenues(lat, lng, radius, socket) {
                 tempLocArr.splice(indexOfCloesest, 1);
                 venue_list.splice(indexOfCloesest, 1);
             }
-            console.log("<--------Sorted venues------->");
-            sortedArr.forEach(function (obj) {
+            //console.log("<--------Sorted venues------->");
+            /*sortedArr.forEach(function (obj) {
                 console.log(obj.name);
-            });
+            });*/
             socket.emit('venues', sortedArr);
 
         }
