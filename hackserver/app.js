@@ -28,17 +28,3 @@ app.listen(3000, function () {
 });
 
 app.use('/users', userController);
-//foursquare test
-var params = {
-    "ll": '43.324772' + "," + '21.895539',
-    "radius": 1000
-};
-foursquare.getCategories(params, function (error, venues) {
-    console.log(error);
-    console.log(venues);
-    venues.response.categories.forEach(function (object) {
-        console.log(object.shortName);
-    });
-    
-});
-//

@@ -120,6 +120,8 @@ var socketport = "3001";
         userLocation.latitude = position.coords.latitude;
         userLocation.longitude = position.coords.longitude;
 
+        alert("HI");
+
         changeMarker(userLocation.latitude, userLocation.longitude);
     }
 
