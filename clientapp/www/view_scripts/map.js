@@ -22,7 +22,7 @@ function initializeMap(width, height, location) {
     $('#map_id').css('width', width);
     console.log("Map view");
 
-    map = L.map('map_id').setView([40.722390, -73.995170], 13);
+    map = L.map('map_id').setView([43.324772, 21.895539], 13);
 
     /*L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
         attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
@@ -210,17 +210,19 @@ var overlays = {};
 function markerOnClick() {
     socket.emit('marker', "Marker je kliknut");
 }
-function setMarker(latitude, longitude) {
-    markerIcon = L.icon({
-        iconUrl: '/android_asset/www/images/red-marker-black-border-hi.png',
-        shadowUrl: '/android_asset/www/images/red-marker-black-border-hi_shadow.png',
 
-        iconSize: [41, 51], // size of the icon
-        shadowSize: [41, 51], // size of the shadow
-        iconAnchor: [20, 51], // point of the icon which will correspond to marker's location
-        shadowAnchor: [18, 49],  // the same for the shadow
-        popupAnchor: [-0, -51] // point from which the popup should open relative to the iconAnchor
-    });
+var markerIcon = L.icon({
+    iconUrl: '/android_asset/www/images/red-marker-black-border-hi.png',
+    shadowUrl: '/android_asset/www/images/red-marker-black-border-hi_shadow.png',
+
+    iconSize: [41, 51], // size of the icon
+    shadowSize: [41, 51], // size of the shadow
+    iconAnchor: [20, 51], // point of the icon which will correspond to marker's location
+    shadowAnchor: [18, 49],  // the same for the shadow
+    popupAnchor: [-0, -51] // point from which the popup should open relative to the iconAnchor
+});
+
+function setMarker(latitude, longitude) {
     marker = L.marker([latitude, longitude], { icon: markerIcon }).on('click', markerOnClick).addTo(map);
     L.circle([longitude, latitude], 100, {
         color: 'blue',
@@ -239,6 +241,14 @@ function changeMarker(latitude, longitude) {
     if (marker !== undefined && marker !== null) {
         marker.setLatLng([latitude, longitude]).update();
     }
+}
+
+function populateMap(objects) {
+    console.log("CAO MATKE");
+    alert(objects[0]);
+    objects.forEach(function (object) {
+        L.marker([object.location.lat, object.location.lng], { icon: markerIcon }).on('click', markerOnClick).addTo(map);
+    });
 }
 
 initializeMap(contentWidth, contentHeight, userLocation);

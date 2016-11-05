@@ -43,6 +43,7 @@ function getFoursquareVenues(lat, lng, radius, socket) {
         "ll": lat + "," + lng,
         "radius": radius
     };
+    console.log("Dule");
     var my_location = { lat: lat, lng: lng };
     foursquare.getVenues(params, function (error, venues) {
         if (!error) {

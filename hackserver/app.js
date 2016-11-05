@@ -29,4 +29,4 @@ app.listen(3000, function () {
 
 app.use('/users', userController);
 
-venues.getFoursquareVenues(43.324772, 21.895539, 1000);
+//venues.getFoursquareVenues(43.324772, 21.895539, 1000);

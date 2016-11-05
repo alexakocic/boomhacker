@@ -33,7 +33,7 @@ io.on('connection', function (socket) {
         schemas.User.update({ _id: msg.id }, { location: { lat: msg.lat, lon: msg.lon } }, function (err, raw) {
             try {
                 schemas.User.update({ _id: msg.id }, { lat: msg.lat, lon: msg.lon }, function (err, raw) {
-                    console.log(msg);
+                    console.log(msg + "test");
                     venuesController.getFoursquareVenues(43.324772, 21.895539, 1000, socket);
                 });
             }

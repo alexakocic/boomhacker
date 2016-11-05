@@ -130,12 +130,10 @@ var socketport = "3001";
         var latitude = position.coords.latitude;
         var longitude = position.coords.longitude;
         //
-        var distance = measure(latitude, longitude, position.coords.latitude, position.coords.longitude);
+        var distance = measure(userLocation.latitude, userLocation.longitude, position.coords.latitude, position.coords.longitude);
         //
         userLocation.latitude = position.coords.latitude;
         userLocation.longitude = position.coords.longitude;
-
-        alert("HI");
 
         changeMarker(userLocation.latitude, userLocation.longitude);
         if (distance > 10)
