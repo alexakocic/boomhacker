@@ -25,9 +25,6 @@ function setUpSocket() {
     socket.on('venues', function (msg) {
         alert("venues socket");
         var mapdiv = $('#map_div');
-        if (mapdiv !== undefined) {
-            populateMap(msg);
-        }
-        else alert(":)");
+        populateMap(msg);
     });
 }
