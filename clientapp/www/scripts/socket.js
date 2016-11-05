@@ -29,6 +29,7 @@ function setUpSocket() {
         populateMap(msg);
     });
 }
+
 function emitLocationUpdate(obj) {
     socket.emit('locationUpdate', obj);
 }
