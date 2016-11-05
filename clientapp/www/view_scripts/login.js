@@ -19,12 +19,12 @@
         beforeSend: function () { startSpinnerLogin(); toggleDisabled(); },
         type: "GET",
         url: url,
-        data: JSON.stringify(data),
+        data: data,
         success: function (data) {
             stopSpinnerLogin();
             localStorage.setItem("id", data);
             console.log(localStorage.getItem("id"));
-            //loadContentView("map");
+            loadContentView("map");
         },
         error: function () {
             stopSpinnerLogin();

@@ -259,7 +259,7 @@ function geoLocationSuccess(position) {
     alert("running");
     var latitude = position.coords.latitude;
     var longitude = position.coords.longitude;
-
+    
     userLocation.latitude = position.coords.latitude;
     userLocation.longitude = position.coords.longitude;
 
@@ -279,7 +279,7 @@ function measure(lat1, lon1, lat2, lon2) {  // generally used geo measurement fu
 }
 
 function updateLocationSuccess(position) {
-    alert("running");
+    alert("running sdigjfbasp");
     var latitude = position.coords.latitude;
     var longitude = position.coords.longitude;
     //
