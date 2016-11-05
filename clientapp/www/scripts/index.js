@@ -34,6 +34,7 @@ var socketport = "3001";
 
     function onDeviceReady() {
 
+        loadContentView("login");
         // Handle the Cordova pause and resume events
         document.addEventListener('pause', onPause.bind(this), false);
         document.addEventListener('resume', onResume.bind(this), false);
@@ -42,15 +43,10 @@ var socketport = "3001";
         var heightDoc = $(window).height();
         var widthDoc = $(window).width();
         $('#divContainer').css('height', heightDoc);
-        var navBarHeight = $('#nav_bar').height();
-        $('#view_content').css('height', heightDoc - navBarHeight);
-        $('#view_content').css('margin-top', navBarHeight);
-        $('#navbarTitle').css('font-size', navBarHeight / 2);
         contentWidth = widthDoc;
         contentHeight = heightDoc - navBarHeight;
-        loadContentView("register");
 
-        setUpMenu();
+        //setUpMenu();
 
         window.onorientationchange = readDeviceOrientation;
 
