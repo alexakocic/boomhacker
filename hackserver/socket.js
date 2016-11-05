@@ -40,5 +40,6 @@ io.on('connection', function (socket) {
                 console.log(err);
             }
         });
+        console.log("Search venues");
     });
 });
