@@ -1,4 +1,7 @@
-﻿var foursquare = (require('foursquarevenues'))('I1LBBPBDFUH3TNLAZEMQ0TG5RU3J3TRENGESX1052JJSUQ0S', 'JEK24NUPFF1IIWHXLN3BPWHRGFU0AHOUOPUGRP332ZGH5SKV');
+﻿var express = require('express');
+var router = express.Router();
+
+var foursquare = (require('foursquarevenues'))('I1LBBPBDFUH3TNLAZEMQ0TG5RU3J3TRENGESX1052JJSUQ0S', 'JEK24NUPFF1IIWHXLN3BPWHRGFU0AHOUOPUGRP332ZGH5SKV');
 
 function measure(lat1, lon1, lat2, lon2) {  // generally used geo measurement function
     var R = 6378.137; // Radius of earth in KM
@@ -32,7 +35,8 @@ function getClosestLocation(location, other_locations) {
 });*/
 //
 //getFoursquareVenues(43.324772, 21.895539, 1000);
-function getFoursquareVenues(lat, lng, radius) {
+
+function getFoursquareVenues(lat, lng, radius, socket) {
     if (radius > 100000)
         radius = 99999;
     var params = {
@@ -102,6 +106,8 @@ function getFoursquareVenues(lat, lng, radius) {
             sortedArr.forEach(function (obj) {
                 console.log(obj.name);
             });
+            socket.emit('venues', sortedArr);
+
         }
         else {
             console.log(error);
@@ -110,4 +116,3 @@ function getFoursquareVenues(lat, lng, radius) {
 }
 
 module.exports.getFoursquareVenues = getFoursquareVenues;
-//

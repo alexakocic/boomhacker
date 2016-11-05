@@ -21,4 +21,8 @@ function setUpSocket() {
     socket.on('locationUpdate', function (msg) {
         
     });
+
+    socket.on('venues', function (msg) {
+        alert(msg);
+    });
 }
