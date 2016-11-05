@@ -41,6 +41,10 @@ function initializeMap(width, height, location) {
     testArr.push({ lat: 40.725190, lng: -73.992150, name: "Misko" });
     var collection = makeAGsonCollection(testArr);
     PointsAnime(collection);
+    L.easyButton('glyphicon glyphicon-home', function () {
+        $('#myModal').modal('show');
+        $('#myModal').find('.modal-body').load("./views/settings.html");
+    }).addTo(map);
 }
 //[{lat:40.722390,lng:-73.995170,name:"Jovke"}]
 function makeAGsonCollection(arrayOfLocations) {
@@ -212,15 +216,15 @@ function markerOnClick() {
 }
 function setMarker(latitude, longitude) {
     markerIcon = L.icon({
-    iconUrl: '/android_asset/www/images/red-marker-black-border-hi.png',
-    shadowUrl: '/android_asset/www/images/red-marker-black-border-hi_shadow.png',
+        iconUrl: '/android_asset/www/images/red-marker-black-border-hi.png',
+        shadowUrl: '/android_asset/www/images/red-marker-black-border-hi_shadow.png',
 
-    iconSize: [41, 51], // size of the icon
-    shadowSize: [41, 51], // size of the shadow
-    iconAnchor: [20, 51], // point of the icon which will correspond to marker's location
-    shadowAnchor: [18, 49],  // the same for the shadow
-    popupAnchor: [-0, -51] // point from which the popup should open relative to the iconAnchor
-});
+        iconSize: [41, 51], // size of the icon
+        shadowSize: [41, 51], // size of the shadow
+        iconAnchor: [20, 51], // point of the icon which will correspond to marker's location
+        shadowAnchor: [18, 49],  // the same for the shadow
+        popupAnchor: [-0, -51] // point from which the popup should open relative to the iconAnchor
+    });
     marker = L.marker([latitude, longitude], { icon: markerIcon }).on('click', markerOnClick).addTo(map);
     L.circle([longitude, latitude], 100, {
         color: 'blue',
