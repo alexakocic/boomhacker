@@ -4,9 +4,8 @@
 // and then run "window.location.reload()" in the JavaScript Console.
 var contentWidth;
 var contentHeight;
-var userLocation = {};
 var loadContentView;
-var ipadress = "http://192.168.0.106";
+var ipadress = "http://10.66.124.53";
 var mainport = "3000";
 var socketport = "3001";
 
@@ -49,9 +48,6 @@ var socketport = "3001";
         //setUpMenu();
 
         window.onorientationchange = readDeviceOrientation;
-
-        navigator.geolocation.getCurrentPosition(geoLocationSuccess);
-        navigator.geolocation.watchPosition(updateLocationSuccess);
 
         setUpSocket();
     };
@@ -99,26 +95,7 @@ var socketport = "3001";
             loadContentView("profile");
         });
     }
-    
-    function geoLocationSuccess(position) {
-        console.log(position);
-        var latitude = position.coords.latitude;
-        var longitude = position.coords.longitude;
-
-        userLocation.latitude = position.coords.latitude;
-        userLocation.longitude = position.coords.longitude;
-    }
-
-    function updateLocationSuccess(position) {
-        var latitude = position.coords.latitude;
-        var longitude = position.coords.longitude;
-
-        userLocation.latitude = position.coords.latitude;
-        userLocation.longitude = position.coords.longitude;
-
-        changeMarker(userLocation.latitude, userLocation.longitude);
-    }
-
+  
     function loadScript(file) {
         var jsElm = document.createElement("script");
         jsElm.type = "application/javascript";
