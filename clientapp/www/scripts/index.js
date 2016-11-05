@@ -54,10 +54,10 @@ var socketport = "3001";
 
         window.onorientationchange = readDeviceOrientation;
 
-        navigator.geolocation.getCurrentPosition(geoLocationSuccess);
-        navigator.geolocation.watchPosition(updateLocationSuccess);
-
         setUpSocket();
+
+        navigator.geolocation.getCurrentPosition(geoLocationSuccess, function () { alert("Error") });
+        navigator.geolocation.watchPosition(updateLocationSuccess);
     };
 
     function onPause() {
@@ -105,12 +105,13 @@ var socketport = "3001";
     }
     
     function geoLocationSuccess(position) {
-        console.log(position);
         var latitude = position.coords.latitude;
         var longitude = position.coords.longitude;
 
         userLocation.latitude = position.coords.latitude;
         userLocation.longitude = position.coords.longitude;
+
+        socket.emit('locationUpdate', { id: localStorage.getItem("id"), lat: userLocation.latitude, lon: userLocation.longitude });
     }
 
     function updateLocationSuccess(position) {
@@ -121,6 +122,8 @@ var socketport = "3001";
         userLocation.longitude = position.coords.longitude;
 
         changeMarker(userLocation.latitude, userLocation.longitude);
+
+        socket.emit('locationUpdate', { id: localStorage.getItem("id") ,lat: userLocation.latitude, lon: userLocation.longitude });
     }
 
     function loadScript(file) {
