@@ -20,8 +20,7 @@ var baselayers = {
 function initializeMap(width, height, location) {
     $('#map_id').css('height', height);
     $('#map_id').css('width', width);
-    console.log("Map view");
-
+    
     map = L.map('map_id').setView([40.722390, -73.995170], 13);
 
     /*L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
