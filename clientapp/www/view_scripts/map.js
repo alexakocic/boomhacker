@@ -2,6 +2,7 @@
 var marker;
 var svg;
 var g;
+var userLocation = {};
 alert("map loaded");
 
 var baselayers = {
