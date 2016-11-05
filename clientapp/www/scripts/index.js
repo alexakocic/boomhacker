@@ -110,7 +110,7 @@ var socketport = "3001";
 
         userLocation.latitude = position.coords.latitude;
         userLocation.longitude = position.coords.longitude;
-
+        console.log(userLocation);
         socket.emit('locationUpdate', { id: localStorage.getItem("id"), lat: userLocation.latitude, lon: userLocation.longitude });
     }
 
