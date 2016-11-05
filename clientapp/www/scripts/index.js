@@ -5,7 +5,7 @@
 var contentWidth;
 var contentHeight;
 var loadContentView;
-var ipadress = "http://10.66.43.155";
+var ipadress = "http://10.66.124.53";
 var mainport = "3000";
 var socketport = "3001";
 
@@ -32,8 +32,6 @@ var socketport = "3001";
     }
 
     function onDeviceReady() {
-
-        loadContentView("login");
         // Handle the Cordova pause and resume events
         document.addEventListener('pause', onPause.bind(this), false);
         document.addEventListener('resume', onResume.bind(this), false);
@@ -43,8 +41,9 @@ var socketport = "3001";
         var widthDoc = $(window).width();
         $('#divContainer').css('height', heightDoc);
         contentWidth = widthDoc;
-        contentHeight = heightDoc - navBarHeight;
+        contentHeight = heightDoc;
 
+        loadContentView("login");
         //setUpMenu();
 
         window.onorientationchange = readDeviceOrientation;
