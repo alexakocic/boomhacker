@@ -47,6 +47,7 @@ function initializeMap(width, height, location) {
     L.easyButton('glyphicon glyphicon-home', function () {
         $('#myModal').modal('show');
         $('#myModal').find('.modal-body').load("./views/settings.html");
+        $('#settings_done').click(function () { $('#myModal').modal('hide'); })
     }).addTo(map);
 
     var url = ipadress + ":" + mainport + "/venues";
