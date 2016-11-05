@@ -48,6 +48,16 @@ function initializeMap(width, height, location) {
         $('#myModal').modal('show');
         $('#myModal').find('.modal-body').load("./views/settings.html");
     }).addTo(map);
+
+    var url = ipadress + ":" + mainport + "/venues";
+
+    $.ajax({
+        type: "GET",
+        url: url,
+        success: function (data) {
+            populateMap(data)
+        }
+    });
 }
 //[{lat:40.722390,lng:-73.995170,name:"Jovke"}]
 function makeAGsonCollection(arrayOfLocations) {
@@ -249,7 +259,6 @@ function changeMarker(latitude, longitude) {
 }
 
 function populateMap(objects) {
-    console.log("CAO MATKE");
     alert(objects[0]);
     objects.forEach(function (object) {
         L.marker([object.location.lat, object.location.lng], { icon: markerIcon }).on('click', markerOnClick).addTo(map);
@@ -267,20 +276,6 @@ function geoLocationSuccess(position) {
 
     userLocation.latitude = position.coords.latitude;
     userLocation.longitude = position.coords.longitude;
-    console.log(socket);
-    emitLocationUpdate({ id: localStorage.getItem("id"), lat: userLocation.latitude, lon: userLocation.longitude });
-}
-
-function measure(lat1, lon1, lat2, lon2) {  // generally used geo measurement function
-    var R = 6378.137; // Radius of earth in KM
-    var dLat = (lat2 - lat1) * Math.PI / 180;
-    var dLon = (lon2 - lon1) * Math.PI / 180;
-    var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-        Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
-        Math.sin(dLon / 2) * Math.sin(dLon / 2);
-    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-    var d = R * c;
-    return d * 1000; // meters
 }
 
 function updateLocationSuccess(position) {
@@ -293,11 +288,6 @@ function updateLocationSuccess(position) {
     userLocation.longitude = position.coords.longitude;
 
     changeMarker(userLocation.latitude, userLocation.longitude);
-    console.log(socket);
-    if (distance > 10)
-        emitLocationUpdate({ id: localStorage.getItem("id"), lat: userLocation.latitude, lon: userLocation.longitude });
-    else
-        console.log("Distanca je manja od 10m");
 }
 
 initializeMap(contentWidth, contentHeight, userLocation);

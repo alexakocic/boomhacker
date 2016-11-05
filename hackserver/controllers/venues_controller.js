@@ -36,7 +36,7 @@ function getClosestLocation(location, other_locations) {
 //
 //getFoursquareVenues(43.324772, 21.895539, 1000);
 
-function getFoursquareVenues(lat, lng, radius, socket) {
+function getFoursquareVenues(lat, lng, radius, callback) {
     if (radius > 100000)
         radius = 99999;
     var params = {
@@ -107,8 +107,7 @@ function getFoursquareVenues(lat, lng, radius, socket) {
             /*sortedArr.forEach(function (obj) {
                 console.log(obj.name);
             });*/
-            socket.emit('venues', sortedArr);
-
+            callback(sortedArr);
         }
         else {
             console.log(error);
@@ -116,4 +115,10 @@ function getFoursquareVenues(lat, lng, radius, socket) {
     });
 }
 
-module.exports.getFoursquareVenues = getFoursquareVenues;
+router.get('/', function (req, res) {
+    getFoursquareVenues(43.324772, 21.895539, 1000, function (data) { 
+        res.status(200).send(data);
+    });
+});
+
+module.exports = router;

@@ -2,10 +2,10 @@
 var app = express();
 var mongoose = require('mongoose');
 var userController = require('./controllers/user_controller');
+var venuesController = require('./controllers/venues_controller');
 var morgan = require('morgan');
 var bodyParser = require("body-parser");
 var socket = require("./socket.js");
-var venues = require('./controllers/venues_controller');
 
 app.use(bodyParser.urlencoded({ limit: '50mb', extended: false }));
 app.use(bodyParser.json());
@@ -28,5 +28,4 @@ app.listen(3000, function () {
 });
 
 app.use('/users', userController);
-
-//venues.getFoursquareVenues(43.324772, 21.895539, 1000);
+app.use('/venues', venuesController);
