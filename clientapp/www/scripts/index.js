@@ -48,7 +48,7 @@ var socketport = "3001";
         $('#navbarTitle').css('font-size', navBarHeight / 2);
         contentWidth = widthDoc;
         contentHeight = heightDoc - navBarHeight;
-        loadContentView("register");
+        loadContentView("map");
 
         setUpMenu();
 

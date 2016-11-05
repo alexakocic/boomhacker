@@ -1,0 +1,25 @@
+﻿.modal { 
+    position: fixed; 
+    width: auto;
+    height: auto; 
+    margin: 0;
+    background-color:black;
+    opacity: 0.4;
+}
+.modal.dialog{
+    width: auto;
+    height:auto; 
+    margin:0px;
+}
+.modal-content{
+    width: auto;
+    height:auto; 
+    margin:0px;
+    background:none;
+}
+.modal-body {  
+    -webkit-overflow-scrolling: touch;
+    width: auto;
+    height: auto; 
+    background:none;
+ }
