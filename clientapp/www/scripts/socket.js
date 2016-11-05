@@ -17,4 +17,8 @@ function setUpSocket() {
             alert(msg.text);
         }
     });
+
+    socket.on('locationUpdate', function (msg) {
+        
+    });
 }
