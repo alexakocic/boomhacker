@@ -6,7 +6,7 @@ var contentWidth;
 var contentHeight;
 var userLocation = {};
 var loadContentView;
-var ipadress = "http://192.168.0.106";
+var ipadress = "http://10.66.124.53";
 var mainport = "3000";
 var socketport = "3001";
 
