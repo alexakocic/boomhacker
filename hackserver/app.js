@@ -33,10 +33,12 @@ var params = {
     "ll": '43.324772' + "," + '21.895539',
     "radius": 1000
 };
-foursquare.getVenues(params, function (error, venues) {
+foursquare.getCategories(params, function (error, venues) {
     console.log(error);
-    console.log(venues.response.venues[0]);
-
+    console.log(venues);
+    venues.response.categories.forEach(function (object) {
+        console.log(object.shortName);
+    });
     
 });
 //
