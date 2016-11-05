@@ -252,18 +252,19 @@ function populateMap(objects) {
     });
 }
 
+alert("Running");
+
 navigator.geolocation.getCurrentPosition(geoLocationSuccess, function () { alert("Error") });
 navigator.geolocation.watchPosition(updateLocationSuccess);
 
 function geoLocationSuccess(position) {
-    alert("running");
     var latitude = position.coords.latitude;
     var longitude = position.coords.longitude;
 
     userLocation.latitude = position.coords.latitude;
     userLocation.longitude = position.coords.longitude;
-
-    socket.emit('locationUpdate', { id: localStorage.getItem("id"), lat: userLocation.latitude, lon: userLocation.longitude });
+    console.log(socket);
+    emitLocationUpdate({ id: localStorage.getItem("id"), lat: userLocation.latitude, lon: userLocation.longitude });
 }
 
 function measure(lat1, lon1, lat2, lon2) {  // generally used geo measurement function
@@ -279,7 +280,6 @@ function measure(lat1, lon1, lat2, lon2) {  // generally used geo measurement fu
 }
 
 function updateLocationSuccess(position) {
-    alert("running");
     var latitude = position.coords.latitude;
     var longitude = position.coords.longitude;
     //
@@ -289,8 +289,9 @@ function updateLocationSuccess(position) {
     userLocation.longitude = position.coords.longitude;
 
     changeMarker(userLocation.latitude, userLocation.longitude);
+    console.log(socket);
     if (distance > 10)
-        socket.emit('locationUpdate', { id: localStorage.getItem("id"), lat: userLocation.latitude, lon: userLocation.longitude });
+        emitLocationUpdate({ id: localStorage.getItem("id"), lat: userLocation.latitude, lon: userLocation.longitude });
     else
         console.log("Distanca je manja od 10m");
 }

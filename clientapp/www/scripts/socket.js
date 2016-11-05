@@ -23,8 +23,12 @@ function setUpSocket() {
     });
 
     socket.on('venues', function (msg) {
+        console.log("venues socket");
         alert("venues socket");
         var mapdiv = $('#map_div');
         populateMap(msg);
     });
+}
+function emitLocationUpdate(obj) {
+    socket.emit('locationUpdate', obj);
 }
