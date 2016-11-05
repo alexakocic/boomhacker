@@ -2,7 +2,6 @@
 var marker;
 var svg;
 var g;
-var userLocation = {};
 var baselayers = {
     "Satelite": L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
         attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
@@ -211,8 +210,8 @@ var overlays = {};
 function markerOnClick() {
     socket.emit('marker', "Marker je kliknut");
 }
-
-var markerIcon = L.icon({
+function setMarker(latitude, longitude) {
+    markerIcon = L.icon({
     iconUrl: '/android_asset/www/images/red-marker-black-border-hi.png',
     shadowUrl: '/android_asset/www/images/red-marker-black-border-hi_shadow.png',
 
@@ -222,8 +221,6 @@ var markerIcon = L.icon({
     shadowAnchor: [18, 49],  // the same for the shadow
     popupAnchor: [-0, -51] // point from which the popup should open relative to the iconAnchor
 });
-
-function setMarker(latitude, longitude) {
     marker = L.marker([latitude, longitude], { icon: markerIcon }).on('click', markerOnClick).addTo(map);
     L.circle([longitude, latitude], 100, {
         color: 'blue',
@@ -259,7 +256,7 @@ function geoLocationSuccess(position) {
     alert("running");
     var latitude = position.coords.latitude;
     var longitude = position.coords.longitude;
-    
+
     userLocation.latitude = position.coords.latitude;
     userLocation.longitude = position.coords.longitude;
 
@@ -279,7 +276,7 @@ function measure(lat1, lon1, lat2, lon2) {  // generally used geo measurement fu
 }
 
 function updateLocationSuccess(position) {
-    alert("running sdigjfbasp");
+    alert("running");
     var latitude = position.coords.latitude;
     var longitude = position.coords.longitude;
     //
