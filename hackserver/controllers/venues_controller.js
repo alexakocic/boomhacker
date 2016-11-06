@@ -209,7 +209,8 @@ function getFoursquareVenues(lat, lng, radius, callback) {
     });
 }
 router.get('/', function (req, res) {
-    getLatLng("Nis", function (data) {
+    console.log("venue");
+    getLatLng(req.query.city, function (data) {
         res.status(200).send(data);
     });
 });
