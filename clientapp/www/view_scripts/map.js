@@ -226,7 +226,8 @@ function PointsAnime(collection) {
 }
 var overlays = {};
 function markerOnClick() {
-    socket.emit('marker', "Marker je kliknut");
+    $('#myModal').modal('show');
+    $('#myModal').find('.modal-body').load('/views/wiki_flicker.html');
 }
 function setMarker(latitude, longitude) {
     markerIcon = L.icon({
