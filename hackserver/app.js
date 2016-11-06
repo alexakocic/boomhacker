@@ -7,7 +7,6 @@ var bodyParser = require("body-parser");
 var socket = require("./socket.js");
 var venues = require('./controllers/venues_controller');
 var request = require("request");
-var bot = require('nodemw');
 
 app.use(bodyParser.urlencoded({ limit: '50mb', extended: false }));
 app.use(bodyParser.json());
@@ -32,15 +31,22 @@ app.listen(3000, function () {
 app.use('/users', userController);
 app.use('/venues', venues);
 
-/*request("https://en.wikipedia.org/w/api.php?action=query&prop=extracts&format=json&exintro&titles=%C4%8Degar", function (error, response, body) {
-    var json = JSON.parse(body).query.pages;
-    var text;
-    for (var property in json) {
-        text = json[property];
+app.get('/wiki', function (req, res) {
+    var query = req.query;
+    var title = query.title;
+    var newString = "";
+    for (var i = 0, len = title.length; i < len; i++) {
+        //console.log(title[i]);
+        newString += title[i] == " " ? "%20" : title[i];
     }
-    console.log(text.extract);
-});*/
+    request("https://en.wikipedia.org/w/api.php?action=query&prop=extracts&format=json&exintro&titles=" + newString, function (error, response, body) {
+        var json = JSON.parse(body);
+        console.log(json);
+        var text = json.query.pages[[Object.keys(json.query.pages)[0]]].extract;
 
-request("https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=wikipedia&srwhat=text&format=json", function (error, response, body) {
-    console.log(body.query.search[0]);
+        res.Wikipedia = text;
+
+        console.log(res);
+        res.status(200).send(text);
+    });
 });

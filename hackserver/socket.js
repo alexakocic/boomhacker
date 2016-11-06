@@ -10,6 +10,7 @@ http.listen(3001, function () {
     console.log('socket.o listening on port 3001');
 });
 
+/*
 io.on('connection', function (socket) {
     console.log('a user connected');
 
@@ -28,4 +29,4 @@ io.on('connection', function (socket) {
     socket.on('message', function (msg) {
         socket.broadcast.emit('message', msg);
     });
-});
+});*/
