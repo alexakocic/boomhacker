@@ -15,12 +15,6 @@ var socketport = "3001";
     document.addEventListener('deviceready', onDeviceReady.bind(this), false);
 
     loadContentView = function(view) {
-        if (view === "login" || view === "register") {
-            $("#nav_bar").hide();
-        }
-
-        else $("#nav_bar").show();
-
         $("#view_content").load("./views/" + view + ".html", function (data) {
             console.log("Ucitan view");
         });
@@ -48,7 +42,7 @@ var socketport = "3001";
 
         window.onorientationchange = readDeviceOrientation;
 
-        setUpSocket();
+        //setUpSocket();
     };
 
     function onPause() {
@@ -63,12 +57,9 @@ var socketport = "3001";
         var heightDoc = window.innerHeight;//$(window).height();
         var widthDoc = window.innerWidth;//$(window).width();
         $('#divContainer').css('height', heightDoc);
-        var navBarHeight = $('#nav_bar').height();
-        $('#view_content').css('height', heightDoc - navBarHeight);
-        $('#view_content').css('margin-top', navBarHeight);
+        $('#view_content').css('height', heightDoc);
         contentWidth = widthDoc;
-        contentHeight = heightDoc - navBarHeight;
-
+        contentHeight = heightDoc;
 
         $('#map_id').css('height', contentHeight);
         $('#map_id').css('width', contentWidth);

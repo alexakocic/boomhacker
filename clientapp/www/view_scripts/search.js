@@ -16,14 +16,17 @@ $('#search_submit').click(function () {
     if (city == "")
         return;
 
-    var url = ipadress + ":" + mainport + "/venues";
+    var url = ipadress + ":" + mainport + "/venues/";
 
     $.ajax({
         type: "GET",
-        data: city,
         url: url,
+        data: { city: city },
         success: function (data) {
-            updateMap(data)
+            $('#search_div').fadeTo(500, 0, function () {
+                $('#modal').html('');
+            });
+            updateMap(data);
         }
     });
 });

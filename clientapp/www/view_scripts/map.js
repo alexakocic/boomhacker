@@ -34,28 +34,12 @@ function initializeMap(width, height, location) {
     }).addTo(map);*/
     L.control.layers(baselayers, overlays).addTo(map);
     baselayers["Satelite"].addTo(map);
-    setMarker(43.324772, 21.895539);
     /*d3.json("./view_scripts/points.geojson", function (collection) {
         PointsAnime(collection);
     });*/
-    var testArr = new Array();
-    testArr.push({ lat: 40.722390, lng: -73.995170, name: "Jovke" });
-    testArr.push({ lat: 40.725190, lng: -73.992150, name: "Misko" });
-    var collection = makeAGsonCollection(testArr);
-    PointsAnime(collection);
     L.easyButton('glyphicon glyphicon-home', function () {
         $('#modal').load("./views/search.html");
     }).addTo(map);
-
-    var url = ipadress + ":" + mainport + "/venues";
-
-    $.ajax({
-        type: "GET",
-        url: url,
-        success: function (data) {
-            populateMap(data)
-        }
-    });
 }
 //[{lat:40.722390,lng:-73.995170,name:"Jovke"}]
 function makeAGsonCollection(arrayOfLocations) {
@@ -257,12 +241,6 @@ function changeMarker(latitude, longitude) {
     }
 }
 
-function populateMap(objects) {
-    objects.forEach(function (object) {
-        L.marker([object.location.lat, object.location.lng], { icon: markerIcon }).on('click', markerOnClick).addTo(map);
-    });
-}
-
 navigator.geolocation.getCurrentPosition(geoLocationSuccess, function () { alert("Error") });
 navigator.geolocation.watchPosition(updateLocationSuccess);
 
@@ -290,12 +268,15 @@ initializeMap(contentWidth, contentHeight, userLocation);
 
 function updateMap(objects) {
     map.panTo(objects[0]);
+    console.log(objects.length);
     objects.shift();
+    console.log(objects.length);
     populateMap(objects);
 }
 
 function populateMap(objects) {
     objects.forEach(function (object) {
+        console.log("Drawing marker "+object.lat + ' ' + object.lng);
         L.marker([object.lat, object.lng], { icon: markerIcon }).on('click', markerOnClick).addTo(map);
     });
 }
