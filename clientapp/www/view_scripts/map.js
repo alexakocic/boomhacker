@@ -46,6 +46,7 @@ function initializeMap(width, height, location) {
     L.easyButton('glyphicon glyphicon-home', function () {
         $('#myModal').modal('show');
         $('#myModal').find('.modal-body').load("./views/search.html");
+        $('#modal_done').append('<i class="glyphicon glyphicon-ok"></i>Done');
         $('#modal_done').click(function () { $('#myModal').modal('hide'); })
     }).addTo(map);
 
