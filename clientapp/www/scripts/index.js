@@ -48,7 +48,7 @@ var socketport = "3001";
 
         window.onorientationchange = readDeviceOrientation;
 
-        setUpSocket();
+        //setUpSocket();
     };
 
     function onPause() {
