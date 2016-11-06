@@ -46,8 +46,8 @@ function initializeMap(width, height, location) {
     PointsAnime(collection);
     L.easyButton('glyphicon glyphicon-home', function () {
         $('#myModal').modal('show');
-        $('#myModal').find('.modal-body').load("./views/settings.html");
-        $('#settings_done').click(function () { $('#myModal').modal('hide'); })
+        $('#myModal').find('.modal-body').load("./views/search.html");
+        $('#modal_done').click(function () { $('#myModal').modal('hide'); })
     }).addTo(map);
 
     var url = ipadress + ":" + mainport + "/venues";
@@ -225,8 +225,9 @@ function PointsAnime(collection) {
     } //end projectPoint
 }
 var overlays = {};
+
 function markerOnClick() {
-    socket.emit('marker', "Marker je kliknut");
+    
 }
 function setMarker(latitude, longitude) {
     markerIcon = L.icon({

@@ -3,23 +3,22 @@
     width: auto;
     height: auto; 
     margin: 0;
-    background-color:black;
-    opacity: 0.4;
+    /*background-color:black;
+    opacity: 0.4;*/
+    background:none;
+    padding:0;
 }
-.modal.dialog{
-    width: auto;
-    height:auto; 
+.modal-dialog{
     margin:0px;
+    height:100%;
 }
 .modal-content{
-    width: auto;
-    height:auto; 
     margin:0px;
+    height:100%;
     background:none;
 }
 .modal-body {  
     -webkit-overflow-scrolling: touch;
-    width: auto;
-    height: auto; 
     background:none;
+    border:none;
  }
