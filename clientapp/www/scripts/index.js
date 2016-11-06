@@ -5,7 +5,7 @@
 var contentWidth;
 var contentHeight;
 var loadContentView;
-var ipadress = "http://10.66.43.155";
+var ipadress = "http://10.66.128.244";
 var mainport = "3000";
 var socketport = "3001";
 
@@ -32,7 +32,6 @@ var socketport = "3001";
     }
 
     function onDeviceReady() {
-
         // Handle the Cordova pause and resume events
         document.addEventListener('pause', onPause.bind(this), false);
         document.addEventListener('resume', onResume.bind(this), false);
@@ -41,15 +40,11 @@ var socketport = "3001";
         var heightDoc = $(window).height();
         var widthDoc = $(window).width();
         $('#divContainer').css('height', heightDoc);
-        var navBarHeight = $('#nav_bar').height();
-        $('#view_content').css('height', heightDoc - navBarHeight);
-        $('#view_content').css('margin-top', navBarHeight);
-        $('#navbarTitle').css('font-size', navBarHeight / 2);
         contentWidth = widthDoc;
-        contentHeight = heightDoc - navBarHeight;
-        loadContentView("register");
+        contentHeight = heightDoc;
 
-        setUpMenu();
+        loadContentView("login");
+        //setUpMenu();
 
         window.onorientationchange = readDeviceOrientation;
 
@@ -99,45 +94,7 @@ var socketport = "3001";
             loadContentView("profile");
         });
     }
-    
-    function geoLocationSuccess(position) {
-        var latitude = position.coords.latitude;
-        var longitude = position.coords.longitude;
-
-        userLocation.latitude = position.coords.latitude;
-        userLocation.longitude = position.coords.longitude;
-
-        socket.emit('locationUpdate', { id: localStorage.getItem("id"), lat: userLocation.latitude, lon: userLocation.longitude });
-    }
-
-    function measure(lat1, lon1, lat2, lon2) {  // generally used geo measurement function
-        var R = 6378.137; // Radius of earth in KM
-        var dLat = (lat2 - lat1) * Math.PI / 180;
-        var dLon = (lon2 - lon1) * Math.PI / 180;
-        var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-            Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
-            Math.sin(dLon / 2) * Math.sin(dLon / 2);
-        var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-        var d = R * c;
-        return d * 1000; // meters
-    }
-
-    function updateLocationSuccess(position) {
-        var latitude = position.coords.latitude;
-        var longitude = position.coords.longitude;
-        //
-        var distance = measure(userLocation.latitude, userLocation.longitude, position.coords.latitude, position.coords.longitude);
-        //
-        userLocation.latitude = position.coords.latitude;
-        userLocation.longitude = position.coords.longitude;
-
-        changeMarker(userLocation.latitude, userLocation.longitude);
-        if (distance > 10)
-            socket.emit('locationUpdate', { id: localStorage.getItem("id"), lat: userLocation.latitude, lon: userLocation.longitude });
-        else
-            console.log("Distanca je manja od 10m");
-    }
-
+  
     function loadScript(file) {
         var jsElm = document.createElement("script");
         jsElm.type = "application/javascript";

@@ -3,6 +3,7 @@ var marker;
 var svg;
 var g;
 var userLocation = {};
+
 var baselayers = {
     "Satelite": L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
         attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
@@ -42,6 +43,21 @@ function initializeMap(width, height, location) {
     testArr.push({ lat: 40.725190, lng: -73.992150, name: "Misko" });
     var collection = makeAGsonCollection(testArr);
     PointsAnime(collection);
+    L.easyButton('glyphicon glyphicon-home', function () {
+        $('#myModal').modal('show');
+        $('#myModal').find('.modal-body').load("./views/search.html");
+        $('#modal_done').click(function () { $('#myModal').modal('hide'); })
+    }).addTo(map);
+
+    var url = ipadress + ":" + mainport + "/venues";
+
+    $.ajax({
+        type: "GET",
+        url: url,
+        success: function (data) {
+            populateMap(data)
+        }
+    });
 }
 //[{lat:40.722390,lng:-73.995170,name:"Jovke"}]
 function makeAGsonCollection(arrayOfLocations) {
@@ -208,22 +224,26 @@ function PointsAnime(collection) {
     } //end projectPoint
 }
 var overlays = {};
+
 function markerOnClick() {
-    socket.emit('marker', "Marker je kliknut");
+    $('#myModal').modal('show');
+    $('#myModal').find('.modal-body').load("./views/wiki_flicker.html");
+    $('#modal_done').html(
+        '<i class="glyphicon glyphicon-ok-circle"></i>Close'
+        );
+    $('#modal_done').click(function () { $('#myModal').modal('hide'); })
 }
-
-var markerIcon = L.icon({
-    iconUrl: '/android_asset/www/images/red-marker-black-border-hi.png',
-    shadowUrl: '/android_asset/www/images/red-marker-black-border-hi_shadow.png',
-
-    iconSize: [41, 51], // size of the icon
-    shadowSize: [41, 51], // size of the shadow
-    iconAnchor: [20, 51], // point of the icon which will correspond to marker's location
-    shadowAnchor: [18, 49],  // the same for the shadow
-    popupAnchor: [-0, -51] // point from which the popup should open relative to the iconAnchor
-});
-
 function setMarker(latitude, longitude) {
+    markerIcon = L.icon({
+        iconUrl: '/android_asset/www/images/red-marker-black-border-hi.png',
+        shadowUrl: '/android_asset/www/images/red-marker-black-border-hi_shadow.png',
+
+        iconSize: [41, 51], // size of the icon
+        shadowSize: [41, 51], // size of the shadow
+        iconAnchor: [20, 51], // point of the icon which will correspond to marker's location
+        shadowAnchor: [18, 49],  // the same for the shadow
+        popupAnchor: [-0, -51] // point from which the popup should open relative to the iconAnchor
+    });
     marker = L.marker([latitude, longitude], { icon: markerIcon }).on('click', markerOnClick).addTo(map);
     L.circle([longitude, latitude], 100, {
         color: 'blue',
@@ -245,8 +265,6 @@ function changeMarker(latitude, longitude) {
 }
 
 function populateMap(objects) {
-    console.log("CAO MATKE");
-    alert(objects[0]);
     objects.forEach(function (object) {
         L.marker([object.location.lat, object.location.lng], { icon: markerIcon }).on('click', markerOnClick).addTo(map);
     });
@@ -256,30 +274,14 @@ navigator.geolocation.getCurrentPosition(geoLocationSuccess, function () { alert
 navigator.geolocation.watchPosition(updateLocationSuccess);
 
 function geoLocationSuccess(position) {
-    alert("running");
     var latitude = position.coords.latitude;
     var longitude = position.coords.longitude;
 
     userLocation.latitude = position.coords.latitude;
     userLocation.longitude = position.coords.longitude;
-
-    socket.emit('locationUpdate', { id: localStorage.getItem("id"), lat: userLocation.latitude, lon: userLocation.longitude });
-}
-
-function measure(lat1, lon1, lat2, lon2) {  // generally used geo measurement function
-    var R = 6378.137; // Radius of earth in KM
-    var dLat = (lat2 - lat1) * Math.PI / 180;
-    var dLon = (lon2 - lon1) * Math.PI / 180;
-    var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-        Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
-        Math.sin(dLon / 2) * Math.sin(dLon / 2);
-    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-    var d = R * c;
-    return d * 1000; // meters
 }
 
 function updateLocationSuccess(position) {
-    alert("running");
     var latitude = position.coords.latitude;
     var longitude = position.coords.longitude;
     //
@@ -289,10 +291,6 @@ function updateLocationSuccess(position) {
     userLocation.longitude = position.coords.longitude;
 
     changeMarker(userLocation.latitude, userLocation.longitude);
-    if (distance > 10)
-        socket.emit('locationUpdate', { id: localStorage.getItem("id"), lat: userLocation.latitude, lon: userLocation.longitude });
-    else
-        console.log("Distanca je manja od 10m");
 }
 
 initializeMap(contentWidth, contentHeight, userLocation);
