@@ -9,4 +9,7 @@ var userSchema = mongoose.Schema({
     lon: String
 });
 
+var venueSchema = mongoose.Schema({}, { strict: false });
+
 module.exports.User = mongoose.model('User', userSchema);
+module.exports.Venue = mongoose.model('Venue', venueSchema);
