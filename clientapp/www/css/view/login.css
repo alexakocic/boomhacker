@@ -25,6 +25,18 @@
             background-color: black;
         }
 
+         #login_form button:hover {
+            outline: none;
+            opacity: 0.4;
+            background-color: black;
+        }
+
+        #login_form button:focus {
+            outline: none;
+            opacity: 0.4;
+            background-color: black;
+        }
+
         #login_form button i {
             float: left;
             margin-top: 2%;

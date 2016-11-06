@@ -227,7 +227,12 @@ function PointsAnime(collection) {
 var overlays = {};
 
 function markerOnClick() {
-    
+    $('#myModal').modal('show');
+    $('#myModal').find('.modal-body').load("./views/wiki_flicker.html");
+    $('#modal_done').html(
+        '<i class="glyphicon glyphicon-ok-circle"></i>Close'
+        );
+    $('#modal_done').click(function () { $('#myModal').modal('hide'); })
 }
 function setMarker(latitude, longitude) {
     markerIcon = L.icon({

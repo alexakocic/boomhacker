@@ -29,18 +29,27 @@
     width: 100%;
     bottom: 0;
 }
+
     .modal-footer button {
         border: 2px solid white;
         width: 70%;
         text-align: center;
         background: none;
-        margin: auto;
+        margin-right: 15%;
+        margin-bottom: 5%;
         height: 40px;
         color: white;
         font-size: 25px;
         margin-top: 2%;
     }
-    .modal-footer button:focus {
+
+        .modal-footer button:focus {
+            outline: none;
+            opacity: 0.4;
+            background-color: black;
+        }
+
+        .modal-footer button:hover {
             outline: none;
             opacity: 0.4;
             background-color: black;
