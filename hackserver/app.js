@@ -2,11 +2,11 @@
 var app = express();
 var mongoose = require('mongoose');
 var userController = require('./controllers/user_controller');
+var venuesController = require('./controllers/venues_controller');
 var morgan = require('morgan');
 var bodyParser = require("body-parser");
 var socket = require("./socket.js");
 var venues = require('./controllers/venues_controller');
-var request = require("request");
 
 app.use(bodyParser.urlencoded({ limit: '50mb', extended: false }));
 app.use(bodyParser.json());
@@ -29,13 +29,5 @@ app.listen(3000, function () {
 });
 
 app.use('/users', userController);
-app.use('/venues', venues);
 
-/*request("https://en.wikipedia.org/w/api.php?action=query&prop=extracts&format=json&exintro&titles=%C4%8Degar", function (error, response, body) {
-    var json = JSON.parse(body).query.pages;
-    var text;
-    for (var property in json) {
-        text = json[property];
-    }
-    console.log(text.extract);
-});*/
+//venues.getFoursquareVenues(43.324772, 21.895539, 1000);

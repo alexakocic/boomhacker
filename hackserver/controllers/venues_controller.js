@@ -36,26 +36,8 @@ function getClosestLocation(location, other_locations) {
 });*/
 //
 //getFoursquareVenues(43.324772, 21.895539, 1000);
-function getLatLng(city, callback) {
-    var params = {
-        "near": city
-    };
-    foursquare.getVenues(params, function (error, venues) {
-        if (venues.response.venues.length == 0)
-            return;
-        var lat = venues.response.venues[0].location.lat;
-        var lng = venues.response.venues[0].location.lng;
-        getFoursquareVenues(lat, lng, 10000, callback);
-    });
-}
-function getFoursquareVenues(lat, lng, radius, callback) {
-    var comasaperated="";
-    for (var i = 0; i < historicalCategories.length; i++) {
-        if (i < (historicalCategories.length - 1))
-            comasaperated += historicalCategories[i] + ',';
-        else
-            comasaperated += historicalCategories[i];
-    }
+
+function getFoursquareVenues(lat, lng, radius, socket) {
     if (radius > 100000)
         radius = 99999;
     var params = {
@@ -142,11 +124,12 @@ function getFoursquareVenues(lat, lng, radius, callback) {
                 tempLocArr.splice(indexOfCloesest, 1);
                 venue_list.splice(indexOfCloesest, 1);
             }
-            console.log("<--------Sorted venues------->");
-            sortedArr.forEach(function (obj) {
-                console.log(obj);
-            });
-            callback(sortedArr);
+            //console.log("<--------Sorted venues------->");
+            /*sortedArr.forEach(function (obj) {
+                console.log(obj.name);
+            });*/
+            socket.emit('venues', sortedArr);
+
         }
         else {
             console.log(error);
@@ -160,3 +143,4 @@ router.get('/', function (req, res) {
 });
 module.exports = router;
 
+module.exports.getFoursquareVenues = getFoursquareVenues;
