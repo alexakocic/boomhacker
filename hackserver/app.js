@@ -36,17 +36,22 @@ app.get('/wiki', function (req, res) {
     var title = query.title;
     var newString = "";
     for (var i = 0, len = title.length; i < len; i++) {
-        //console.log(title[i]);
+        //console.log(title[i]); 
         newString += title[i] == " " ? "%20" : title[i];
     }
     request("https://en.wikipedia.org/w/api.php?action=query&prop=extracts&format=json&exintro&titles=" + newString, function (error, response, body) {
-        var json = JSON.parse(body);
-        console.log(json);
-        var text = json.query.pages[[Object.keys(json.query.pages)[0]]].extract;
+        try {
+            var json = JSON.parse(body);
+            console.log(json);
+            var text = json.query.pages[[Object.keys(json.query.pages)[0]]].extract;
 
-        res.Wikipedia = text;
+            res.Wikipedia = text;
 
-        console.log(res);
-        res.status(200).send(text);
+            console.log(res);
+            res.status(200).send(text);
+        }
+        catch (err) {
+            console.log(err);
+        }
     });
 });
