@@ -30,3 +30,9 @@ $('#search_submit').click(function () {
         }
     });
 });
+
+$('#closeSearch').click(function () {
+    $('#search_div').fadeTo(500, 0, function () {
+        $('#modal').html('');
+    });
+});

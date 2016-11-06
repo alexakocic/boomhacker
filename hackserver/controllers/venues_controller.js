@@ -31,7 +31,7 @@ function getLocationPhoto(lat, lng, text, callback) {
             flickr.photos.getSizes({
                 photo_id: photo.id
             }, function (er, data) {
-                var url = data.sizes.size[5];
+                var url = data.sizes.size[3];
                 callback(url);
                 });
     });

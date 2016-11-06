@@ -24,5 +24,35 @@ $('#wfInfoClose').click(function () {
 });
 
 function fillLocData(object) {
+    locationData = object;
 
+    var url = ipadress + ":" + mainport + "/wiki/";
+    console.log(object.name);
+    $.ajax({
+        type: "GET",
+        url: url,
+        data: { title: object.name },
+        success: function (data) {
+            $('#text_holder').html(data);
+        },
+        error: function () {
+        }
+    });
+
+    //add image
+    url = ipadress + ":" + mainport + "/venues/flickr/";
+    console.log(object.name);
+    console.log(object.lat);
+    console.log(object.lng);
+    $.ajax({
+        type: "GET",
+        url: url,
+        data: { lat: object.lat, lng: object.lng, text: object.name },
+        success: function (data) {
+            $('#image_tag').attr('src',data.source);
+        },
+        error: function () {
+            console.log('greska');
+        }
+    });
 }

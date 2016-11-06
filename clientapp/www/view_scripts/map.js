@@ -3,6 +3,7 @@ var marker;
 var svg;
 var g;
 var userLocation = {};
+var arrayOfMarkers = new Array();
 
 var baselayers = {
     "Satelite": L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
@@ -216,8 +217,11 @@ var markerIcon = L.icon({
     shadowAnchor: [18, 49],  // the same for the shadow
     popupAnchor: [-0, -51] // point from which the popup should open relative to the iconAnchor
 });
-function markerOnClick() {
-    $('#modal').load("./views/wiki_flicker.html");
+function markerOnClick(index) {
+    $('#modal').load("./views/wiki_flicker.html", function () {
+        map.closePopup();
+        fillLocData(arrayOfMarkers[index]);
+    });
 }
 function setMarker(latitude, longitude) {
     marker = L.marker([latitude, longitude], { icon: markerIcon }).on('click', markerOnClick).addTo(map);
@@ -255,7 +259,7 @@ function updateLocationSuccess(position) {
     var latitude = position.coords.latitude;
     var longitude = position.coords.longitude;
     //
-    var distance = measure(userLocation.latitude, userLocation.longitude, position.coords.latitude, position.coords.longitude);
+    //var distance = measure(userLocation.latitude, userLocation.longitude, position.coords.latitude, position.coords.longitude);
     //
     userLocation.latitude = position.coords.latitude;
     userLocation.longitude = position.coords.longitude;
@@ -264,8 +268,14 @@ function updateLocationSuccess(position) {
 }
 
 initializeMap(contentWidth, contentHeight, userLocation);
-
+function removeMarkers() {
+    for (var i = 0; i < arrayOfMarkers.length; i++) {
+        map.removeLayer(arrayOfMarkers[i]);
+    }
+    arrayOfMarkers = new Array();
+}
 function updateMap(objects) {
+    removeMarkers();
     map.panTo(objects[0]);
     console.log(objects.length);
     objects.shift();
@@ -276,6 +286,12 @@ function updateMap(objects) {
 function populateMap(objects) {
     console.log(markerIcon);
     for (var i = 0; i < objects.length; i++) {
-        L.marker([objects[i].lat, objects[i].lng], { icon: markerIcon }).on('click', markerOnClick).addTo(map);
+        //var m = L.marker([objects[i].lat, objects[i].lng], { icon: markerIcon }).on('click', markerOnClick).addTo(map);
+        var m = L.marker([objects[i].lat, objects[i].lng], { icon: markerIcon }).bindPopup("<p>" + objects[i].name + "</p><button onclick='markerOnClick(" + i + ")'>See more</button>").addTo(map);
+        m.id = objects[i].id;
+        m.name = objects[i].name;
+        m.lat = objects[i].lat;
+        m.lng = objects[i].lng;
+        arrayOfMarkers.push(m);
     }
 }
