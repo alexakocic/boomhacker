@@ -41,6 +41,3 @@ app.use('/venues', venues);
     console.log(text.extract);
 });*/
 
-request("https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=wikipedia&srwhat=text&format=json", function (error, response, body) {
-    console.log(body.query.search[0]);
-});

@@ -1,10 +1,43 @@
 ﻿var express = require('express');
 var router = express.Router();
 var request = require("request");
-
+var Flickr = require("flickrapi");
 var foursquare = (require('foursquarevenues'))('I1LBBPBDFUH3TNLAZEMQ0TG5RU3J3TRENGESX1052JJSUQ0S', 'JEK24NUPFF1IIWHXLN3BPWHRGFU0AHOUOPUGRP332ZGH5SKV');
 var historicalCategories = ["4bf58dd8d48988d12d941735", "4bf58dd8d48988d181941735", "4bf58dd8d48988d166941735", "50aaa49e4b90af0d42d5de11", "56aa371be4b08b9a8d573562", "4deefb944765f83613cdba6e", "4bf58dd8d48988d190941735", "4bf58dd8d48988d191941735", "4bf58dd8d48988d192941735", "4bf58dd8d48988d18f941735"];
 var histCatNames = ["Monument", "Museum", "Sculpture", "Castle", "Canal", "Historic", "History", "Science", "Planetarium", "Art"];
+
+var flickrOptions = {
+    api_key: "0620ac295c10f8d21b08700b10f1ab03",
+    secret: "be50186cfe468696",
+    user_id: "144813403@N08",
+    access_token: "72157673416857091-67da7510bc19dd9e",
+    access_token_secret: "7d46de3dfc47b41f"
+};
+
+function getLocationPhoto(lat, lng, text, callback) {
+    Flickr.authenticate(flickrOptions, function (error, flickr) {
+        flickr.photos.search({
+            lat: lat,
+            lon: lng,
+            radius: 1,
+            accuracy: 16,
+            text: text
+        }, function (err, result) {
+            if (result.photos.photo.length == 0) {
+                callback("");
+                return;
+            }
+            var photo = result.photos.photo[0];
+            flickr.photos.getSizes({
+                photo_id: photo.id
+            }, function (er, data) {
+                var url = data.sizes.size[5];
+                callback(url);
+                });
+    });
+    });
+}
+
 function measure(lat1, lon1, lat2, lon2) {  // generally used geo measurement function
     var R = 6378.137; // Radius of earth in KM
     var dLat = (lat2 - lat1) * Math.PI / 180;
@@ -209,7 +242,7 @@ function getFoursquareVenues(lat, lng, radius, callback) {
     });
 }
 router.get('/', function (req, res) {
-    getLatLng("Nis", function (data) {
+    getLatLng(req.query.city, function (data) {
         res.status(200).send(data);
     });
 });
@@ -219,5 +252,12 @@ router.get('/venue', function (req, res) {
         res.status(200).send(data);
     });
 });
+
+router.get('/flickr', function (req, res) {
+    getLocationPhoto(req.query.lat, req.query.lng, req.query.text, function (image) {
+        res.status(200).send(image);
+    });
+});
+
 module.exports = router;
 
