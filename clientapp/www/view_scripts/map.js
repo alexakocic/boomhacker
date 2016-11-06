@@ -3,7 +3,6 @@ var marker;
 var svg;
 var g;
 var userLocation = {};
-alert("map loaded");
 
 var baselayers = {
     "Satelite": L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
@@ -227,8 +226,7 @@ function PointsAnime(collection) {
 var overlays = {};
 
 function markerOnClick() {
-    $('#myModal').modal('show');
-    $('#myModal').find('.modal-body').load('/views/wiki_flicker.html');
+    
 }
 function setMarker(latitude, longitude) {
     markerIcon = L.icon({
@@ -262,13 +260,10 @@ function changeMarker(latitude, longitude) {
 }
 
 function populateMap(objects) {
-    alert(objects[0]);
     objects.forEach(function (object) {
         L.marker([object.location.lat, object.location.lng], { icon: markerIcon }).on('click', markerOnClick).addTo(map);
     });
 }
-
-alert("Running");
 
 navigator.geolocation.getCurrentPosition(geoLocationSuccess, function () { alert("Error") });
 navigator.geolocation.watchPosition(updateLocationSuccess);
