@@ -206,21 +206,20 @@ function PointsAnime(collection) {
     } //end projectPoint
 }
 var overlays = {};
+var markerIcon = L.icon({
+    iconUrl: '/android_asset/www/images/red-marker-black-border-hi.png',
+    shadowUrl: '/android_asset/www/images/red-marker-black-border-hi_shadow.png',
 
+    iconSize: [41, 51], // size of the icon
+    shadowSize: [41, 51], // size of the shadow
+    iconAnchor: [20, 51], // point of the icon which will correspond to marker's location
+    shadowAnchor: [18, 49],  // the same for the shadow
+    popupAnchor: [-0, -51] // point from which the popup should open relative to the iconAnchor
+});
 function markerOnClick() {
     $('#modal').load("./views/wiki_flicker.html");
 }
 function setMarker(latitude, longitude) {
-    markerIcon = L.icon({
-        iconUrl: '/android_asset/www/images/red-marker-black-border-hi.png',
-        shadowUrl: '/android_asset/www/images/red-marker-black-border-hi_shadow.png',
-
-        iconSize: [41, 51], // size of the icon
-        shadowSize: [41, 51], // size of the shadow
-        iconAnchor: [20, 51], // point of the icon which will correspond to marker's location
-        shadowAnchor: [18, 49],  // the same for the shadow
-        popupAnchor: [-0, -51] // point from which the popup should open relative to the iconAnchor
-    });
     marker = L.marker([latitude, longitude], { icon: markerIcon }).on('click', markerOnClick).addTo(map);
     L.circle([longitude, latitude], 100, {
         color: 'blue',
@@ -275,8 +274,8 @@ function updateMap(objects) {
 }
 
 function populateMap(objects) {
-    objects.forEach(function (object) {
-        console.log("Drawing marker "+object.lat + ' ' + object.lng);
-        L.marker([object.lat, object.lng], { icon: markerIcon }).on('click', markerOnClick).addTo(map);
-    });
+    console.log(markerIcon);
+    for (var i = 0; i < objects.length; i++) {
+        L.marker([objects[i].lat, objects[i].lng], { icon: markerIcon }).on('click', markerOnClick).addTo(map);
+    }
 }
