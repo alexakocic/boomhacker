@@ -1,6 +1,6 @@
 ﻿function tryLogin() {
     var url = ipadress + ":" + mainport + "/users/login";
-
+    console.log(url);
     var data = {
         username: $('#login_username').val(),
         password: $('#login_password').val()

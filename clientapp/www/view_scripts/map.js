@@ -264,10 +264,14 @@ function changeMarker(latitude, longitude) {
         marker.setLatLng([latitude, longitude]).update();
     }
 }
-
+function updateMap(objects) {
+    map.panTo(objects[0]);
+    objects.shift();
+    populateMap(objects);
+}
 function populateMap(objects) {
     objects.forEach(function (object) {
-        L.marker([object.location.lat, object.location.lng], { icon: markerIcon }).on('click', markerOnClick).addTo(map);
+        L.marker([object.lat, object.lng], { icon: markerIcon }).on('click', markerOnClick).addTo(map);
     });
 }
 

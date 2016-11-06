@@ -5,7 +5,7 @@
 var contentWidth;
 var contentHeight;
 var loadContentView;
-var ipadress = "http://10.66.128.244";
+var ipadress = "http://10.66.124.53";
 var mainport = "3000";
 var socketport = "3001";
 
