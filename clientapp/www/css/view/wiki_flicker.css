@@ -1,17 +1,2 @@
 ﻿#objectInfo {
 }
-
-    #objectInfo button {
-        width: 70%;
-        margin: auto;
-        background: none;
-        border: 2px solid white;
-        height: 40px;
-        color: white;
-        font-size: 25px;
-    }
-
-        #objectInfo button i {
-            float: left;
-            margin-top: 2%;
-        }
