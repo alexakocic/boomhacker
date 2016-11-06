@@ -23,7 +23,7 @@ function setUpSocket() {
     });
 
     socket.on('venues', function (msg) {
-        alert("venues socket");
+        alert(msg[0]);
         var mapdiv = $('#map_div');
         populateMap(msg);
     });
