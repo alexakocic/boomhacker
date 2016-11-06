@@ -33,7 +33,7 @@
         data: JSON.stringify(data),
         success: function (data) {
             localStorage.setItem("id", data);
-            //loadContentView("");
+            loadContentView("map");
         },
         error: function () {
             stopSpinnerRegister();
