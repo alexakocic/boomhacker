@@ -44,10 +44,7 @@ function initializeMap(width, height, location) {
     var collection = makeAGsonCollection(testArr);
     PointsAnime(collection);
     L.easyButton('glyphicon glyphicon-home', function () {
-        $('#myModal').modal('show');
-        $('#myModal').find('.modal-body').load("./views/search.html");
-        $('#modal_done').append('<i class="glyphicon glyphicon-ok"></i>Done');
-        $('#modal_done').click(function () { $('#myModal').modal('hide'); })
+        $('#modal').load("./views/search.html");
     }).addTo(map);
 
     var url = ipadress + ":" + mainport + "/venues";
@@ -227,12 +224,7 @@ function PointsAnime(collection) {
 var overlays = {};
 
 function markerOnClick() {
-    $('#myModal').modal('show');
-    $('#myModal').find('.modal-body').load("./views/wiki_flicker.html");
-    $('#modal_done').html(
-        '<i class="glyphicon glyphicon-ok-circle"></i>Close'
-        );
-    $('#modal_done').click(function () { $('#myModal').modal('hide'); })
+    $('#modal').load("./views/wiki_flicker.html");
 }
 function setMarker(latitude, longitude) {
     markerIcon = L.icon({
@@ -264,14 +256,10 @@ function changeMarker(latitude, longitude) {
         marker.setLatLng([latitude, longitude]).update();
     }
 }
-function updateMap(objects) {
-    map.panTo(objects[0]);
-    objects.shift();
-    populateMap(objects);
-}
+
 function populateMap(objects) {
     objects.forEach(function (object) {
-        L.marker([object.lat, object.lng], { icon: markerIcon }).on('click', markerOnClick).addTo(map);
+        L.marker([object.location.lat, object.location.lng], { icon: markerIcon }).on('click', markerOnClick).addTo(map);
     });
 }
 
@@ -299,3 +287,15 @@ function updateLocationSuccess(position) {
 }
 
 initializeMap(contentWidth, contentHeight, userLocation);
+
+function updateMap(objects) {
+    map.panTo(objects[0]);
+    objects.shift();
+    populateMap(objects);
+}
+
+function populateMap(objects) {
+    objects.forEach(function (object) {
+        L.marker([object.lat, object.lng], { icon: markerIcon }).on('click', markerOnClick).addTo(map);
+    });
+}
