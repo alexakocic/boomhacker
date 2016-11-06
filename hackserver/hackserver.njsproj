@@ -32,6 +32,7 @@
   <ItemGroup>
     <Compile Include="app.js" />
     <Compile Include="controllers\user_controller.js" />
+    <Compile Include="controllers\venues_controller.js" />
     <Compile Include="schema.js" />
     <Compile Include="socket.js" />
     <Content Include="package.json" />
@@ -47,6 +48,7 @@
     <Folder Include="typings\globals\mongoose\" />
     <Folder Include="typings\globals\morgan\" />
     <Folder Include="typings\globals\node\" />
+    <Folder Include="typings\globals\request\" />
     <Folder Include="typings\globals\socket.io\" />
   </ItemGroup>
   <ItemGroup>
@@ -55,6 +57,7 @@
     <TypeScriptCompile Include="typings\globals\mongoose\index.d.ts" />
     <TypeScriptCompile Include="typings\globals\morgan\index.d.ts" />
     <TypeScriptCompile Include="typings\globals\node\index.d.ts" />
+    <TypeScriptCompile Include="typings\globals\request\index.d.ts" />
     <TypeScriptCompile Include="typings\globals\socket.io\index.d.ts" />
     <TypeScriptCompile Include="typings\index.d.ts" />
   </ItemGroup>
