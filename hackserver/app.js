@@ -7,6 +7,7 @@ var bodyParser = require("body-parser");
 var socket = require("./socket.js");
 var venues = require('./controllers/venues_controller');
 var request = require("request");
+var bot = require('nodemw');
 
 app.use(bodyParser.urlencoded({ limit: '50mb', extended: false }));
 app.use(bodyParser.json());
@@ -39,3 +40,7 @@ app.use('/venues', venues);
     }
     console.log(text.extract);
 });*/
+
+request("https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=wikipedia&srwhat=text&format=json", function (error, response, body) {
+    console.log(body.query.search[0]);
+});

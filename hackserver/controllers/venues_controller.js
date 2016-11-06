@@ -78,28 +78,17 @@ function getVenue(id, callback) {
         }
         res.Venue = Venue;
 
-        request("https://en.wikipedia.org/w/api.php?action=query&prop=extracts&format=json&exintro&titles=St._Peter%27s_Basilica", function (error, response, body) {
-            console.log("what???? " + body);
-            var json = JSON.parse(body).query.pages;
-            //var text = findExtract(json);
+        request("https://en.wikipedia.org/w/api.php?action=query&prop=extracts&format=json&exintro&titles=2016_Chicago_Cubs_season", function (error, response, body) {
+            var json = JSON.parse(body);
+            console.log(json);
+            var text = json.query.pages[[Object.keys(json.query.pages)[0]]].extract;
 
-            res.Wikipedia = text.exports;
+            res.Wikipedia = text;
 
             console.log(res);
             callback(res);
         });
     });
-}
-
-function findExtract(json) {
-    if (json === null || json === undefined) return "";
-    for (var property in json) {
-        console.log(property);
-        if (property === "extract") {
-            return json[property];
-        }
-        else findExtract(json[property]);
-    }
 }
 
 function getLatLng(city, callback) {
