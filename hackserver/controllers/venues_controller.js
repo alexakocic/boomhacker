@@ -1,9 +1,10 @@
 ﻿var express = require('express');
 var router = express.Router();
+var request = require("request");
 
 var foursquare = (require('foursquarevenues'))('I1LBBPBDFUH3TNLAZEMQ0TG5RU3J3TRENGESX1052JJSUQ0S', 'JEK24NUPFF1IIWHXLN3BPWHRGFU0AHOUOPUGRP332ZGH5SKV');
 var historicalCategories = ["4bf58dd8d48988d12d941735", "4bf58dd8d48988d181941735", "4bf58dd8d48988d166941735", "50aaa49e4b90af0d42d5de11", "56aa371be4b08b9a8d573562", "4deefb944765f83613cdba6e", "4bf58dd8d48988d190941735", "4bf58dd8d48988d191941735", "4bf58dd8d48988d192941735", "4bf58dd8d48988d18f941735"];
-var histCatNames = ["Monument", "Museum", "Sculpture", "Castle", "Canal", "Historic", "History", "Science", "Planetarium","Art"];
+var histCatNames = ["Monument", "Museum", "Sculpture", "Castle", "Canal", "Historic", "History", "Science", "Planetarium", "Art"];
 function measure(lat1, lon1, lat2, lon2) {  // generally used geo measurement function
     var R = 6378.137; // Radius of earth in KM
     var dLat = (lat2 - lat1) * Math.PI / 180;
@@ -36,8 +37,91 @@ function getClosestLocation(location, other_locations) {
 });*/
 //
 //getFoursquareVenues(43.324772, 21.895539, 1000);
+function getVenue(id, callback) {
+    var res = {};
+    var params = {
+        "venue_id": id
+    };
+    foursquare.getVenue(params, function (error, venues) {
+        var object = venues.response.venue;
+        var Venue = {};
+        Venue.id = object.id;
+        Venue.name = object.name;
+        Venue.contact = object.contact;
+        Venue.location = object.location;
+        Venue.categories = object.categories;
+        Venue.url = object.url;
+        try {
+            Venue.hours = object.hours;
+        } catch (e) {
+            Venue.hours = {};
+        }
+        try {
+            Venue.rating = object.rating;
+        } catch (e) {
+            Venue.rating = {};
+        }
+        try {
+            Venue.description = object.description;
+        } catch (e) {
+            Venue.description = {};
+        }
+        try {
+            Venue.tags = object.tags;
+        } catch (e) {
+            Venue.tags = {};
+        }
+        try {
+            Venue.photos = object.photos;
+        } catch (e) {
+            Venue.photos = {};
+        }
+        res.Venue = Venue;
 
-function getFoursquareVenues(lat, lng, radius, socket) {
+        request("https://en.wikipedia.org/w/api.php?action=query&prop=extracts&format=json&exintro&titles=St._Peter%27s_Basilica", function (error, response, body) {
+            console.log("what???? " + body);
+            var json = JSON.parse(body).query.pages;
+            //var text = findExtract(json);
+
+            res.Wikipedia = text.exports;
+
+            console.log(res);
+            callback(res);
+        });
+    });
+}
+
+function findExtract(json) {
+    if (json === null || json === undefined) return "";
+    for (var property in json) {
+        console.log(property);
+        if (property === "extract") {
+            return json[property];
+        }
+        else findExtract(json[property]);
+    }
+}
+
+function getLatLng(city, callback) {
+    var params = {
+        "near": city
+    };
+    foursquare.getVenues(params, function (error, venues) {
+        if (venues.response.venues.length == 0)
+            return;
+        var lat = venues.response.venues[0].location.lat;
+        var lng = venues.response.venues[0].location.lng;
+        getFoursquareVenues(lat, lng, 10000, callback);
+    });
+}
+function getFoursquareVenues(lat, lng, radius, callback) {
+    var comasaperated = "";
+    for (var i = 0; i < historicalCategories.length; i++) {
+        if (i < (historicalCategories.length - 1))
+            comasaperated += historicalCategories[i] + ',';
+        else
+            comasaperated += historicalCategories[i];
+    }
     if (radius > 100000)
         radius = 99999;
     var params = {
@@ -117,19 +201,18 @@ function getFoursquareVenues(lat, lng, radius, socket) {
             for (var i = 0; i < numOfVenues; i++) {
                 var indexOfCloesest = getClosestLocation(my_location, tempLocArr);
                 //console.log("Iteracija " + i + ", index najblizi: " + indexOfCloesest);
-                sortedArr.push({ id: venue_list[indexOfCloesest].id, name: venue_list[indexOfCloesest].name , lat: venue_list[indexOfCloesest].location.lat, lng: venue_list[indexOfCloesest].location.lng, type: venue_list[indexOfCloesest].type });
+                sortedArr.push({ id: venue_list[indexOfCloesest].id, name: venue_list[indexOfCloesest].name, lat: venue_list[indexOfCloesest].location.lat, lng: venue_list[indexOfCloesest].location.lng, type: venue_list[indexOfCloesest].type });
                 //my_location changing
                 my_location = tempLocArr[indexOfCloesest];
                 //remove item from tempLocArr
                 tempLocArr.splice(indexOfCloesest, 1);
                 venue_list.splice(indexOfCloesest, 1);
             }
-            //console.log("<--------Sorted venues------->");
-            /*sortedArr.forEach(function (obj) {
-                console.log(obj.name);
-            });*/
-            socket.emit('venues', sortedArr);
-
+            console.log("<--------Sorted venues------->");
+            sortedArr.forEach(function (obj) {
+                console.log(obj);
+            });
+            callback(sortedArr);
         }
         else {
             console.log(error);
@@ -141,6 +224,11 @@ router.get('/', function (req, res) {
         res.status(200).send(data);
     });
 });
+router.get('/venue', function (req, res) {
+    var id = req.query.id;
+    getVenue(id, function (data) {
+        res.status(200).send(data);
+    });
+});
 module.exports = router;
 
-module.exports.getFoursquareVenues = getFoursquareVenues;
