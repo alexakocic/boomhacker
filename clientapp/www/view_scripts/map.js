@@ -208,8 +208,8 @@ function PointsAnime(collection) {
 }
 var overlays = {};
 var markerIcon = L.icon({
-    iconUrl: '/android_asset/www/images/red-marker-black-border-hi.png',
-    shadowUrl: '/android_asset/www/images/red-marker-black-border-hi_shadow.png',
+    iconUrl: '/android_asset/www/images/marker.svg',
+    //shadowUrl: '/android_asset/www/images/red-marker-black-border-hi_shadow.png',
 
     iconSize: [41, 51], // size of the icon
     shadowSize: [41, 51], // size of the shadow

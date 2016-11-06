@@ -25,7 +25,7 @@
             background-color: black;
         }
 
-         #login_form button:hover {
+        #login_form button:hover {
             outline: none;
             opacity: 0.4;
             background-color: black;
@@ -103,14 +103,14 @@
     font-size: 15px;
 }
 
-#loaderContainerLogin i{
-    margin: auto;
-    color: white;
-    text-align: center;
-    font-size: 50px;
-    margin-top: -20%;
-    color:red;
-}
+    #loaderContainerLogin i {
+        margin: auto;
+        color: white;
+        text-align: center;
+        font-size: 50px;
+        margin-top: -20%;
+        color: red;
+    }
 
 .loaderL {
     color: #00ff21;

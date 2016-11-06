@@ -1,7 +1,6 @@
 ﻿var locationData = {};
 
 $('#objectInfo').ready(function () {
-
     $('#modalBckg').css('width', $(window).width());
     $('#modalBckg').css('height', $(window).height());
 
@@ -29,6 +28,7 @@ function fillLocData(object) {
     var url = ipadress + ":" + mainport + "/wiki/";
     console.log(object.name);
     $.ajax({
+        beforeSend: function () { },
         type: "GET",
         url: url,
         data: { title: object.name },
@@ -45,14 +45,30 @@ function fillLocData(object) {
     console.log(object.lat);
     console.log(object.lng);
     $.ajax({
+        beforeSend: function () { },
         type: "GET",
         url: url,
         data: { lat: object.lat, lng: object.lng, text: object.name },
         success: function (data) {
-            $('#image_tag').attr('src',data.source);
+            $('#image_tag').attr('src', data.source);
         },
         error: function () {
-            console.log('greska');
         }
     });
+}
+
+function startSpinnerFlickrImg() {
+    $('#image_holder').html('<div class="loaderFlickr"></div>');
+}
+
+function stopSpinnerFlickrImg() {
+    $('#image_holder').html('<img id="image_tag" src="" alt="" />');
+}
+
+function startSpinnerFlickrTxt() {
+    $('#text_holder').html('<div class="loaderFlickr"></div>');
+}
+
+function stopSpinnerFlickrTxt() {
+    $('#text_holder').html('');
 }

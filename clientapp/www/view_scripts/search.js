@@ -8,6 +8,7 @@
 
     $('#searchOptions').css('width', $(window).width());
     $('#searchOptions').css('height', $(window).height() * 0.5);
+    $('#searchOptions').css('margin-top', $(window).height() * 0.2);
 });
 
 $('#search_submit').click(function () {
@@ -19,6 +20,7 @@ $('#search_submit').click(function () {
     var url = ipadress + ":" + mainport + "/venues/";
 
     $.ajax({
+        beforeSend: function () { startSpinnerSearch(); toggleDisabled(); },
         type: "GET",
         url: url,
         data: { city: city },
@@ -27,6 +29,14 @@ $('#search_submit').click(function () {
                 $('#modal').html('');
             });
             updateMap(data);
+        },
+        error: function () {
+            stopSpinnerSearch();
+            toggleEnabled();
+            $('#searchOptions').html(
+                '<i class="glyphicon glyphicon-warning-sign"></i><br />' +
+                'Something went wrong!'
+                );
         }
     });
 });
@@ -36,3 +46,23 @@ $('#closeSearch').click(function () {
         $('#modal').html('');
     });
 });
+
+function startSpinnerSearch() {
+    $('#searchOptions').html('<div class="loaderSrch"></div>');
+}
+
+function stopSpinnerSearch() {
+    $('#searchOptions').html('');
+}
+
+function toggleDisabled() {
+    $("#search_city").prop("disabled", true);
+    $("#search_submit").prop("disabled", true);
+    $("#closeSearch").prop("disabled", true);
+}
+
+function toggleEnabled() {
+    $("#search_city").prop("disabled", false);
+    $("#search_submit").prop("disabled", false);
+    $("#closeSearch").prop("disabled", false);
+}
